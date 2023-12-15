@@ -1,7 +1,5 @@
 // Enunciado => https://campusvirtual.uva.es/pluginfile.php/5408664/mod_resource/content/10/Enunciado-P-2023-24.pdf
 
-package PracticaFinal;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -224,8 +222,8 @@ public class practicaDefinitiva {
                     limpiadorTerminal();
 
                     // tresElementosIguales(tableroJuego);
-                    filasOColumnasIguales(tableroJuego);
-
+                    // filasOColumnasIguales(tableroJuego);
+                    tableroRellenado(tableroJuego);
                     System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
                     System.out.println("Nos vemos en la proxima partida!!");
 
@@ -253,7 +251,7 @@ public class practicaDefinitiva {
     // Funcion que genera el tablero
     public static int[][] generadorTablero(int[][] tablero) {
         // Especifico la ruta del archivo
-        String rutaArchivo = "Laboratorio\\PracticaFinal\\tableros.txt";
+        String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
 
         // Variable para almacenar la linea leida del archivo
         String[] lineaLeida = new String[1];
@@ -439,7 +437,8 @@ public class practicaDefinitiva {
         return tableroJuego;
     }
 
-    public static boolean tresElementosIguales(int[][] tableroACorregir) { 
+    // Compruebo si hay tres elementos iguales tanto en vertical como en horizontal
+    public static boolean tresElementosIguales(int[][] tableroACorregir) {
         boolean validoFila = true;
         boolean validoColumna = true;
 
@@ -520,5 +519,22 @@ public class practicaDefinitiva {
             System.out.println("Hay 3 elementos iguales en la fila o la columna");
             return false;
         }
+    }
+
+    // Funcion que comprueba si el tablero esta completo o no
+    public static boolean tableroRellenado(int[][] tableroACorregir) {
+        for (int i = 0; i < tableroACorregir.length*tableroACorregir.length; i++) {
+
+            int fila = i % tableroACorregir.length;
+            int columna = i / tableroACorregir.length;
+
+            if (tableroACorregir[fila][columna] == 0) {
+                System.out.println("Hay huecos sin rellenar");
+                return false;
+            }
+
+        }
+        System.out.println("El tablero esta completado");
+        return true;
     }
 }
