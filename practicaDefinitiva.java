@@ -221,9 +221,10 @@ public class practicaDefinitiva {
                 } else {
                     limpiadorTerminal();
 
-                    // tresElementosIguales(tableroJuego);
-                    // filasOColumnasIguales(tableroJuego);
                     tableroRellenado(tableroJuego);
+                    tresElementosIguales(tableroJuego);
+                    filasOColumnasIguales(tableroJuego);
+                    
                     System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
                     System.out.println("Nos vemos en la proxima partida!!");
 
@@ -439,13 +440,14 @@ public class practicaDefinitiva {
 
     // Funcion que comprueba si el tablero esta completo o no
     public static boolean tableroRellenado(int[][] tableroACorregir) {
-        for (int i = 0; i < tableroACorregir.length*tableroACorregir.length; i++) {
+        for (int cont = 0; cont < tableroACorregir.length * tableroACorregir.length; cont++) {
 
-            int fila = i % tableroACorregir.length;
-            int columna = i / tableroACorregir.length;
+            int fila = cont % tableroACorregir.length;
+            int columna = cont / tableroACorregir.length;
 
             if (tableroACorregir[fila][columna] == 0) {
-                System.out.println("Hay huecos sin rellenar");
+                System.out.println("Error, el tablero no esta completo...")
+                System.out.println("Faltan huecos por rellenar...");
                 return false;
             }
 
@@ -538,6 +540,3 @@ public class practicaDefinitiva {
         }
     }
 }
-
-
-prueba
