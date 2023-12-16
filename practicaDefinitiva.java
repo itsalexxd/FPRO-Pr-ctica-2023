@@ -513,11 +513,10 @@ public class practicaDefinitiva {
 
             // Extraigo la fila en cuestion
             for(int cont2 = 0; cont < longitud; cont2++){
+                // Extraigo la fila a comprobar
                 filaExtraida[cont2] = tableroACorregir[fila][cont2];
-            }
-        
-            // Extraigo la columna en cuestion
-            for(int cont2 = 0; cont < longitud; cont2++){
+
+                // Extraigo la columna a comprobar 
                 columnaExtraida[cont2] = tableroACorregir[cont2][columna];
             }
         }
