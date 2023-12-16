@@ -224,7 +224,7 @@ public class practicaDefinitiva {
                     tableroRellenado(tableroJuego);
                     tresElementosIguales(tableroJuego);
                     filasOColumnasIguales(tableroJuego);
-                    
+
                     System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
                     System.out.println("Nos vemos en la proxima partida!!");
 
@@ -282,7 +282,6 @@ public class practicaDefinitiva {
         // Eligo una linea al hazar del array con los tableros
         String lineaElegida = lineaLeida[(int) (Math.random() * lineaLeida.length)];
 
-        
         String linea = lineaElegida.replaceAll("\\s", "");
 
         System.out.println(linea);
@@ -504,52 +503,54 @@ public class practicaDefinitiva {
         int[] filaExtraida = new int[6];
         int[] columnaExtraida = new int[6];
 
-        
-
         // Primero: Extraigo la fila y columna que quiero comprobar si se repiten
-        for (int cont = 0; cont < tableroACorregir.length * tableroACorregir.length; cont++) {
+        for (int cont = 0; cont < tableroACorregir.length; cont++) {
             fila = cont % longitud;
             columna = cont / longitud;
 
             // Extraigo la fila en cuestion
-            for(int cont2 = 0; cont < longitud; cont2++){
+            for (int cont2 = 0; cont < longitud; cont2++) {
+                fila = cont2 % longitud;
+                columna = cont2 / longitud;
+
                 // Extraigo la fila a comprobar
-                filaExtraida[cont2] = tableroACorregir[fila][cont2];
+                filaExtraida[fila] = tableroACorregir[fila][columna];
 
-                // Extraigo la columna a comprobar 
-                columnaExtraida[cont2] = tableroACorregir[cont2][columna];
+                // Extraigo la columna a comprobar
+                columnaExtraida[columna] = tableroACorregir[fila][columna];
+
+                // Segundo: Recorro el tablero en busca de si se repiten las filas o las
+                // columnas
+                for (int cont3 = 0; cont3 < tableroACorregir.length; cont3++) {
+                    fila = cont3 % longitud;
+                    columna = cont3 / longitud;
+
+                    // Compruebo si la fila es igual a otra en el tablero
+                    if (filaExtraida[cont3] == tableroACorregir[fila][cont3]) {
+                        repeticionEnFila++;
+
+                        if (repeticionEnFila == longitud) {
+                            filasRepetidas = false;
+                        }
+                    }
+
+                    // Compruebo si la fila es igual a otra en el tablero
+                    if (columnaExtraida[cont3] == tableroACorregir[cont3][columna]) {
+                        repeticionEnColumna++;
+
+                        if (repeticionEnColumna == longitud) {
+                            columnasRepetidas = false;
+                        }
+                    }
+                }
             }
         }
 
-        // Segundo: Recorro el tablero en busca de si se repiten las filas o las columnas
-        for(int cont2 = 0; cont2 < tableroACorregir.length; cont2++){
-            fila = cont2 % longitud;
-            columna = cont2 / longitud;
-            
-            // Compruebo si la fila es igual a otra en el tablero
-            if(filaExtraida[cont2] == tableroACorregir[fila][cont2]){
-                repeticionEnFila++;
-
-                if(repeticionEnFila == longitud){
-                    filasRepetidas = false;
-                }
-            }
-
-            // Compruebo si la fila es igual a otra en el tablero
-            if(columnaExtraida[cont2] == tableroACorregir[cont2][columna]){
-                repeticionEnColumna++;
-
-                if(repeticionEnColumna == longitud){
-                    columnasRepetidas = false;
-                }
-            }
-        }
-
-        if(filasRepetidas){
+        if (filasRepetidas) {
             System.out.println("Se repite al menos una fila.");
         }
 
-        if(columnasRepetidas){
+        if (columnasRepetidas) {
             System.out.println("Se repite al menos una columna.");
         }
 
