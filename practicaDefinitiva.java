@@ -533,7 +533,6 @@ public class practicaDefinitiva {
 
                 if(repeticionEnFila == longitud){
                     filasRepetidas = false;
-                    System.out.println("Hay una fila que se repite");
                 }
             }
 
@@ -543,13 +542,16 @@ public class practicaDefinitiva {
 
                 if(repeticionEnColumna == longitud){
                     columnasRepetidas = false;
-                    System.out.println("Se repite una columna");
                 }
             }
         }
 
-        if(filasRepetidas && columnasRepetidas){
-            
+        if(filasRepetidas){
+            System.out.println("Se repite al menos una fila.");
+        }
+
+        if(columnasRepetidas){
+            System.out.println("Se repite al menos una columna.");
         }
 
         return false;
