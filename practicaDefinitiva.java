@@ -446,7 +446,7 @@ public class practicaDefinitiva {
             int columna = cont / tableroACorregir.length;
 
             if (tableroACorregir[fila][columna] == 0) {
-                System.out.println("Error, el tablero no esta completo...")
+                System.out.println("Error, el tablero no esta completo...");
                 System.out.println("Faltan huecos por rellenar...");
                 return false;
             }
