@@ -493,6 +493,10 @@ public class practicaDefinitiva {
     public static boolean filasOColumnasIguales(int[][] tableroACorregir) {
         boolean filasRepetidas = true;
         boolean columnasRepetidas = true;
+        int repeticionEnFila = 0;
+        int repeticionEnColumna = 0;
+
+        int longitud = 6;
 
         int fila = 0;
         int columna = 0;
@@ -502,41 +506,52 @@ public class practicaDefinitiva {
 
         
 
-        // Compruebo si hay mas de 3 elementos iguales en cada fila
-        for (int cont = 0; cont < tableroACorregir.length / 2; cont++) {
-            fila = cont % 6;
-            columna = cont / 6;
+        // Primero: Extraigo la fila y columna que quiero comprobar si se repiten
+        for (int cont = 0; cont < tableroACorregir.length; cont++) {
+            fila = cont % longitud;
+            columna = cont / longitud;
 
-            // Para las filas
             // Extraigo la fila en cuestion
-            for(int cont2 = 0; cont < 6; cont2++){
-                filaExtraida[cont2] = tableroACorregir[fila][columna + cont2];
-
-                if(filaExtraida[cont2] == tableroACorregir[fila][cont2]){
-                    columnasRepetidas = false;
-                }
+            for(int cont2 = 0; cont < longitud; cont2++){
+                filaExtraida[cont2] = tableroACorregir[fila][cont2];
             }
         
-
-            // Para las columnas
             // Extraigo la columna en cuestion
-            for(int cont2 = 0; cont < 6; cont2++){
-                columnaExtraida[cont2] = tableroACorregir[fila + cont2][columna];
+            for(int cont2 = 0; cont < longitud; cont2++){
+                columnaExtraida[cont2] = tableroACorregir[cont2][columna];
+            }
+        }
 
-                
+        // Segundo: Recorro el tablero en busca de si se repiten las filas o las columnas
+        for(int cont2 = 0; cont2 < tableroACorregir.length; cont2++){
+            fila = cont2 % longitud;
+            columna = cont2 / longitud;
+            
+            // Compruebo si la fila es igual a otra en el tablero
+            if(filaExtraida[cont2] == tableroACorregir[fila][cont2]){
+                repeticionEnFila++;
+
+                if(repeticionEnFila == longitud){
+                    filasRepetidas = false;
+                    System.out.println("Hay una fila que se repite");
+                }
             }
 
-            if(columnaExtraida[cont] == tableroACorregir[cont][columna]){
+            // Compruebo si la fila es igual a otra en el tablero
+            if(columnaExtraida[cont2] == tableroACorregir[cont2][columna]){
+                repeticionEnColumna++;
+
+                if(repeticionEnColumna == longitud){
                     columnasRepetidas = false;
+                    System.out.println("Se repite una columna");
                 }
+            }
         }
 
-        if (filasRepetidas && columnasRepetidas) {
-            System.out.println("No hay 3 elementos iguales en la fila o la columna.");
-            return true;
-        } else {
-            System.out.println("Hay 3 elementos iguales en la fila o la columna");
-            return false;
+        if(filasRepetidas && columnasRepetidas){
+            
         }
+
+        return false;
     }
 }
