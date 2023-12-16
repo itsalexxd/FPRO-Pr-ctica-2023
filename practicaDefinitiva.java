@@ -507,7 +507,7 @@ public class practicaDefinitiva {
         
 
         // Primero: Extraigo la fila y columna que quiero comprobar si se repiten
-        for (int cont = 0; cont < tableroACorregir.length; cont++) {
+        for (int cont = 0; cont < tableroACorregir.length * tableroACorregir.length; cont++) {
             fila = cont % longitud;
             columna = cont / longitud;
 
