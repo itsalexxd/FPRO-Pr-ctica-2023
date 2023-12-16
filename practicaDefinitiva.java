@@ -437,6 +437,23 @@ public class practicaDefinitiva {
         return tableroJuego;
     }
 
+    // Funcion que comprueba si el tablero esta completo o no
+    public static boolean tableroRellenado(int[][] tableroACorregir) {
+        for (int i = 0; i < tableroACorregir.length*tableroACorregir.length; i++) {
+
+            int fila = i % tableroACorregir.length;
+            int columna = i / tableroACorregir.length;
+
+            if (tableroACorregir[fila][columna] == 0) {
+                System.out.println("Hay huecos sin rellenar");
+                return false;
+            }
+
+        }
+        System.out.println("El tablero esta completado");
+        return true;
+    }
+
     // Compruebo si hay tres elementos iguales tanto en vertical como en horizontal
     public static boolean tresElementosIguales(int[][] tableroACorregir) {
         boolean validoFila = true;
@@ -519,22 +536,5 @@ public class practicaDefinitiva {
             System.out.println("Hay 3 elementos iguales en la fila o la columna");
             return false;
         }
-    }
-
-    // Funcion que comprueba si el tablero esta completo o no
-    public static boolean tableroRellenado(int[][] tableroACorregir) {
-        for (int i = 0; i < tableroACorregir.length*tableroACorregir.length; i++) {
-
-            int fila = i % tableroACorregir.length;
-            int columna = i / tableroACorregir.length;
-
-            if (tableroACorregir[fila][columna] == 0) {
-                System.out.println("Hay huecos sin rellenar");
-                return false;
-            }
-
-        }
-        System.out.println("El tablero esta completado");
-        return true;
     }
 }
