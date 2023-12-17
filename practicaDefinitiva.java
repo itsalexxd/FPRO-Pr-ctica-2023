@@ -197,14 +197,14 @@ public class practicaDefinitiva {
         int contadorVictorias = 0;
         int porcentajeVictorias = 0;
 
-        
+        tablero = generadorTablero(tablero);
+        mostrarTablero(tablero);
 
         while (!finPartida) {
             jugada = "";
             finPartida = false;
 
-            tablero = generadorTablero(tablero);
-            mostrarTablero(tablero);
+            
             
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
@@ -212,8 +212,7 @@ public class practicaDefinitiva {
 
 
             if (!jugada.equals("finPartida")) {
-
-                
+                // Retrocedemos una la jugada tantas veces como el usuario quiera
                 if(jugada.equals("-")){
                     int jugadaAnterior = almacenJugadas[contadorJugadas + 1];
                     fila = jugadaAnterior % 10;
@@ -259,6 +258,9 @@ public class practicaDefinitiva {
                     System.out.println();
                     System.out.println();
                     System.out.println();
+
+                    tablero = generadorTablero(tablero);
+                    mostrarTablero(tablero);
 
                 } else {
                     limpiadorTerminal();
@@ -310,7 +312,7 @@ public class practicaDefinitiva {
         String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
 
         // Variable para almacenar la linea leida del archivo
-        String[] lineaLeida = new String[2];
+        String[] lineaLeida = new String[24];
 
         // Abro el archivo
         try {
