@@ -436,10 +436,8 @@ public class practicaDefinitiva {
                     jugada = scanner2.nextLine();
                 }
             }
-
             // Cierro el objeto scanner
             scanner2.close();
-
             return jugada;
         }
 
@@ -465,6 +463,18 @@ public class practicaDefinitiva {
             System.out.print("Esa casilla no se puede editar...");
         } else {
             tableroJuego[fila][columna] = (tableroJuego[fila][columna] + 1) % 3;
+        }
+
+        return tableroJuego;
+    }
+
+    // Funcion que se encarga de insertar las jugadas
+    public static int[][] recuperarJugada(int fila, int columna, int[][] tableroJuego) {
+        // Compruebo que valor es la posicion y modifico en funcion del que sea
+        if (tableroJuego[fila][columna] < 0) {
+            System.out.print("Esa casilla no se puede editar...");
+        } else {
+            tableroJuego[fila][columna] = (tableroJuego[fila][columna] - 1) % 3;
         }
 
         return tableroJuego;
