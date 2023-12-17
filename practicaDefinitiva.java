@@ -182,9 +182,6 @@ public class practicaDefinitiva {
 
         limpiadorTerminal();
 
-        // Variable que nos permite controlar el bucle while
-        boolean volverJugar = false;
-
         // Creo una matriz que almacene al tablero
         int[][] tablero = new int[6][6];
         // Array que almacena las jugadas
@@ -200,7 +197,7 @@ public class practicaDefinitiva {
         int contadorVictorias = 0;
         int porcentajeVictorias = 0;
 
-
+        
 
         while (!finPartida) {
             jugada = "";
@@ -208,20 +205,25 @@ public class practicaDefinitiva {
 
             tablero = generadorTablero(tablero);
             mostrarTablero(tablero);
+            
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
-            contadorJugadas++;
+            contadorJugadas--;
 
 
             if (!jugada.equals("finPartida")) {
-                fila = extraeFila(jugada);
-                columna = extraeColumna(jugada);
 
-                almacenaJugadasUsuario(fila, columna, almacenJugadas, contadorJugadas);
                 
                 if(jugada.equals("-")){
+                    int jugadaAnterior = almacenJugadas[contadorJugadas + 1];
+                    fila = jugadaAnterior % 10;
+                    columna = jugadaAnterior - (fila * 10);
+                    recuperarJugada(fila, columna, tablero);
+                }else{                
+                    fila = extraeFila(jugada);
+                    columna = extraeColumna(jugada);
 
-                }else{
+                    almacenaJugadasUsuario(fila, columna, almacenJugadas, contadorJugadas);
                     tablero = realizarJugada(fila, columna, tablero);
                 }
                 
@@ -230,8 +232,8 @@ public class practicaDefinitiva {
                 System.out.println(); // Salto de linea
                 System.out.println(); // Salto de linea
 
-                mostrarTablero(tablero);
-            
+                
+            mostrarTablero(tablero);
             }else {
 
                 System.out.println("Va a finalizar la partida, ¿Esta seguro de hacerlo?");
@@ -275,6 +277,10 @@ public class practicaDefinitiva {
                     System.out.println("Tableros jugados: " + contPartidas);
                     porcentajeVictorias=(int)(((double)contadorVictorias)/((double)contPartidas)) * 100;
                     System.out.println("Porcentaje de victorias: " + porcentajeVictorias + "%");
+
+                    System.out.println();
+                    System.out.println();
+
                     System.out.println("Nos vemos en la proxima partida!!");
 
                     finPartida = true;
@@ -390,6 +396,10 @@ public class practicaDefinitiva {
         Scanner scanner2 = new Scanner(System.in);
 
         String jugada = scanner2.nextLine();
+        
+        if(jugada.equals("-")){
+            return jugada;
+        }
 
         if (jugada.equals("")) {
             jugada = "finPartida";
