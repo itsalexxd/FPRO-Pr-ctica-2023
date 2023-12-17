@@ -242,6 +242,9 @@ public class practicaDefinitiva {
                     compruebaFilasRepetidas(tableroJuego);
                     compruebaColumnasRepetidas(tableroJuego);
 
+                    System.out.println();
+                    System.out.println();
+
                     System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
 
                     porcentajeVictorias=(int)(((double)contadorVictorias)/((double)contadorIntentos)) * 100;
@@ -499,7 +502,7 @@ public class practicaDefinitiva {
             }
         }
 
-        if (validoFila && validoColumna) {
+        if (!validoFila && !validoColumna) {
             System.out.println("No hay 3 elementos iguales en la fila o la columna.");
             return true;
         } else {
@@ -519,8 +522,8 @@ public class practicaDefinitiva {
                 int elementosIguales = 0;
 
                 // Comparamos cada elemento
-                for(int columna = 0; columna < tablero.length; columna++){
-                    if(tablero[columna][filaInicial] == tablero[columna][filaComparar]){
+                for(int cont = 0; cont < tablero.length; cont++){
+                    if(Math.abs(tablero[cont][filaInicial]) == Math.abs(tablero[cont][filaComparar])){
                         elementosIguales++;
                     }
                 }
@@ -545,8 +548,8 @@ public class practicaDefinitiva {
                 int elementosIguales = 0;
 
                 // Comparamos cada elemento
-                for(int fila = 0; fila < tablero.length; fila++){
-                    if(tablero[fila][columnaInicial] == tablero[fila][columnaComparar]){
+                for(int cont = 0; cont < tablero.length; cont++){
+                    if(Math.abs(tablero[cont][columnaInicial]) == Math.abs(tablero[cont][columnaComparar])){
                         elementosIguales++;
                     }
                 }
