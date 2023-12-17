@@ -225,7 +225,7 @@ public class practicaDefinitiva {
                     tresElementosIguales(tableroJuego);
                     filasOColumnasIguales(tableroJuego);
 
-                    System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
+                    System.out.println("Has jugado un total de: " + contadorIntentos + " tableroso.");
 
                 } else {
                     limpiadorTerminal();
@@ -499,8 +499,8 @@ public class practicaDefinitiva {
 
     // Hay 2 filas o columnas iguales
     public static boolean filasOColumnasIguales(int[][] tableroACorregir) {
-        boolean filasRepetidas = true;
-        boolean columnasRepetidas = true;
+        boolean filasRepetidas = false;
+        boolean columnasRepetidas = false;
         int repeticionEnFila;
         int repeticionEnColumna;
 
@@ -529,7 +529,7 @@ public class practicaDefinitiva {
                                 repeticionEnFila++;
 
                             if (repeticionEnFila == tableroACorregir.length) {
-                                filasRepetidas = false;
+                                filasRepetidas = true;
                             }
                         }
 
@@ -538,7 +538,7 @@ public class practicaDefinitiva {
                             repeticionEnColumna++;
 
                             if (repeticionEnColumna == tableroACorregir.length) {
-                                columnasRepetidas = false;
+                                columnasRepetidas = true;
                             }
                         }
                     }
@@ -548,18 +548,18 @@ public class practicaDefinitiva {
 
         }
 
-        if (!filasRepetidas) {
+        if (filasRepetidas) {
             System.out.println("Se repite al menos una fila.");
         }
 
-        if (!columnasRepetidas) {
+        if (columnasRepetidas) {
             System.out.println("Se repite al menos una columna.");
         }
 
         if (filasRepetidas && columnasRepetidas) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
 
     }
