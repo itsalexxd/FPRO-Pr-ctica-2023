@@ -278,7 +278,7 @@ public class practicaDefinitiva {
         String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
 
         // Variable para almacenar la linea leida del archivo
-        String[] lineaLeida = new String[1];
+        String[] lineaLeida = new String[2];
 
         // Abro el archivo
         try {
@@ -502,11 +502,11 @@ public class practicaDefinitiva {
             }
         }
 
-        if (!validoFila && !validoColumna) {
-            System.out.println("No hay 3 elementos iguales en la fila o la columna.");
+        if (validoFila && validoColumna) {
+            System.out.println("Hay 3 elementos iguales en la fila o la columna");
             return true;
         } else {
-            System.out.println("Hay 3 elementos iguales en la fila o la columna");
+            System.out.println("No hay 3 elementos iguales en la fila o la columna.");
             return false;
         }
     }
