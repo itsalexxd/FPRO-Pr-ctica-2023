@@ -262,6 +262,12 @@ public class practicaDefinitiva {
                     tablero = generadorTablero(tablero);
                     mostrarTablero(tablero);
 
+
+
+
+
+
+                    
                 } else {
                     limpiadorTerminal();
 
