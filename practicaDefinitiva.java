@@ -180,10 +180,11 @@ public class practicaDefinitiva {
             }
         }
 
-        limpiadorTerminal();
+        // Variable que nos permite controlar el bucle while
+        boolean volverJugar = false;
 
         // Creo una matriz que almacene al tablero
-        int[][] tableroJuego = new int[6][6];
+        int[][] tablero = new int[6][6];
 
         String jugada = "";
         int fila = 0;
@@ -194,6 +195,36 @@ public class practicaDefinitiva {
         int contadorVictorias= 0;
         int porcentajeVictorias=0;
 
+
+        do{
+            // Generamos el tablero principal
+            generadorTablero(tablero);
+        }while(volverJugar);
+
+
+        // Fin del juego (del bucle del programa)
+        scanner.close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        limpiadorTerminal();
+
+
+
         while (!finPartida) {
             jugada = "";
             finPartida = false;
@@ -202,6 +233,7 @@ public class practicaDefinitiva {
             mostrarTablero(tableroJuego);
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
+
 
             if (!jugada.equals("finPartida")) {
                 fila = extraeFila(jugada);
@@ -214,7 +246,11 @@ public class practicaDefinitiva {
                 System.out.println(); // Salto de linea
 
                 mostrarTablero(tableroJuego);
-            } else {
+            } else if(jugada.equals("-")) {
+                
+            }else {
+
+            
                 // Pregunto si quiere volver a jugar
                 System.out.println("¿Quieres volver a jugar?");
                 System.out.println("Si / No: ");
@@ -470,7 +506,25 @@ public class practicaDefinitiva {
     return tablerosAnteriores;
 }
 
-    
+    // Funcion que almacena las jugadas realizadas por el usuario
+    public static int[][][] almacenarJugadasRealizadas(int contJugadas, int[][] tablero, int[][][] tablerosAnteriores){
+        for(int fila = 0; fila  < tablero.length ;fila++){
+            for(int columna = 0; columna < tablero.length; columna++){
+                tablerosAnteriores[columna][fila][contJugadas] = tablero[columna][fila];
+            }
+        }
+        return tablerosAnteriores;
+    }
+
+    // Funcion que recupera la jugada inmediatamente anterior
+    public static int[][] recuperaJugada(int[][][]tablerosAnteriores, int[][]tableroAnterior, int contJugadas){
+        for(int fila = 0; fila  < tableroAnterior.length ;fila++){
+            for(int columna = 0; columna < tableroAnterior.length; columna++){
+                tableroAnterior[columna][fila] = tablerosAnteriores[columna][fila][contJugadas];
+            }
+        }
+        return tableroAnterior;
+    }
 
     // Funcion que comprueba si el tablero esta completo o no
     public static boolean tableroRellenado(int[][] tableroACorregir) {
