@@ -513,23 +513,27 @@ public class practicaDefinitiva {
             // columnas
             for (int cont3 = 0; cont3 < tableroACorregir.length; cont3++) {
                 for (int cont4 = 0; cont4 < tableroACorregir.length; cont4++) {
-                    // Compruebo si la fila es igual a otra en el tablero
-                    if (filaExtraida[cont4] == Math.abs(tableroACorregir[cont3][cont4]) && cont4 != cont3) {
-                        repeticionEnFila++;
 
-                        if (repeticionEnFila == tableroACorregir.length) {
-                            filasRepetidas = false;
+                    if(cont4 != cont && cont3 != cont){
+                        // Compruebo si la fila es igual a otra en el tablero
+                        if (filaExtraida[cont4] == Math.abs(tableroACorregir[cont3][cont4]) && cont3 != cont4) {
+                                repeticionEnFila++;
+
+                            if (repeticionEnFila == tableroACorregir.length) {
+                                filasRepetidas = false;
+                            }
+                        }
+
+                        // Compruebo si la fila es igual a otra en el tablero
+                        if (columnaExtraida[cont4] == Math.abs(tableroACorregir[cont4][cont3]) && cont3 != cont4) {
+                            repeticionEnColumna++;
+
+                            if (repeticionEnColumna == tableroACorregir.length) {
+                                columnasRepetidas = false;
+                            }
                         }
                     }
 
-                    // Compruebo si la fila es igual a otra en el tablero
-                    if (columnaExtraida[cont4] == Math.abs(tableroACorregir[cont4][cont3])) {
-                        repeticionEnColumna++;
-
-                        if (repeticionEnColumna == tableroACorregir.length) {
-                            columnasRepetidas = false;
-                        }
-                    }
                 }
             }
 
