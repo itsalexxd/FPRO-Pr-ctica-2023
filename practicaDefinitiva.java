@@ -225,7 +225,7 @@ public class practicaDefinitiva {
                     contadorIntentos++;
                     limpiadorTerminal();
 
-                    if (tableroRellenado(tableroJuego) && tresElementosIguales(tableroJuego)&& filasOColumnasIguales(tableroJuego)){
+                    if (tableroRellenado(tableroJuego) && tresElementosIguales(tableroJuego) && compruebaFilasRepetidas(tableroJuego) && compruebaColumnasRepetidas(tableroJuego)){
                         contadorVictorias++;
                     }
 
@@ -234,15 +234,18 @@ public class practicaDefinitiva {
                 } else {
                     limpiadorTerminal();
 
+                    System.out.println("¿Sera un tablero valido segun las normas?");
+                    System.out.println();
+
                     tableroRellenado(tableroJuego);
                     tresElementosIguales(tableroJuego);
-                    filasOColumnasIguales(tableroJuego);
+                    compruebaFilasRepetidas(tableroJuego);
+                    compruebaColumnasRepetidas(tableroJuego);
 
                     System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
 
                     porcentajeVictorias=(int)(((double)contadorVictorias)/((double)contadorIntentos)) * 100;
-
-                    System.out.println("Tu porcentaje de victorias es" + porcentajeVictorias + "%");
+                    System.out.println("Tu porcentaje de victorias es del: " + porcentajeVictorias + "%");
                     System.out.println("Nos vemos en la proxima partida!!");
 
                     finPartida = true;
@@ -522,28 +525,38 @@ public class practicaDefinitiva {
                     }
                 }
                 if(elementosIguales == tablero.length){
+                    System.out.println("Se repite al menos una fila");
                     return true;
                 }
             }
         }
+        System.out.println("No se repite ninguna fila");
         return false;
     }
 
     // Compruebo si hay columnas iguales
-    public static boolean columnasIguales(int[][]tablero){
-        for (int columnaBase = 0; columnaBase < tablero.length-1; columnaBase++){ // Elegir columna base
-            for(int columnaComparada = columnaBase+1; columnaComparada < tablero.length; columnaComparada++){ // Elegir columna a comparar
-                int casillasIguales = 0;
-                for(int fila = 0; fila < tablero.length; fila++){ // Comparar elementos de cada columna
-                    if(tablero[columnaBase][fila] == tablero[columnaComparada][fila]){
-                        casillasIguales++;
+    public static boolean compruebaColumnasRepetidas(int[][]tablero){
+        // Elegimos la fila que queremos comparar
+        for (int columnaInicial = 0; columnaInicial < tablero.length - 1; columnaInicial++){
+
+            // Elegimos la fila con la que vamos a comparar
+            for(int columnaComparar = columnaInicial + 1; columnaComparar < tablero.length; columnaComparar++){
+                // Creo una variable que lleve la cuenta de los elementos iguales
+                int elementosIguales = 0;
+
+                // Comparamos cada elemento
+                for(int fila = 0; fila < tablero.length; fila++){
+                    if(tablero[fila][columnaInicial] == tablero[fila][columnaComparar]){
+                        elementosIguales++;
                     }
                 }
-                if(casillasIguales == tablero.length){
+                if(elementosIguales == tablero.length){
+                    System.out.println("Se repite al menos una columna");
                     return true;
                 }
             }
         }
+        System.out.println("No se repite ninguna columna");
         return false;
     }
 }
