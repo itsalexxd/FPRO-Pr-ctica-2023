@@ -193,6 +193,7 @@ public class practicaDefinitiva {
         boolean finPartida = false;
 
         int contadorIntentos = 0;
+        int contadorVictorias;
 
         while (!finPartida) {
             System.out.print("Por favor, inserte la jugada que desea realizar: ");
@@ -213,11 +214,19 @@ public class practicaDefinitiva {
                 // Pregunto si quiere volver a jugar
                 System.out.println("¿Quieres volver a jugar?");
                 System.out.println("Si / No: ");
-                jugada = scanner.nextLine();
+                jugada = scanner.next();
 
-                if (jugada == "Si") {
+                if (jugada.equals("Si")) {
                     // Sumo un intento a la partida
                     contadorIntentos++;
+                    limpiadorTerminal();
+
+                    tableroRellenado(tableroJuego);
+                    tresElementosIguales(tableroJuego);
+                    filasOColumnasIguales(tableroJuego);
+
+                    System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
+
                 } else {
                     limpiadorTerminal();
 
@@ -514,9 +523,9 @@ public class practicaDefinitiva {
             for (int cont3 = 0; cont3 < tableroACorregir.length; cont3++) {
                 for (int cont4 = 0; cont4 < tableroACorregir.length; cont4++) {
 
-                    if(cont4 != cont && cont3 != cont){
+                    if(cont3 != cont){
                         // Compruebo si la fila es igual a otra en el tablero
-                        if (filaExtraida[cont4] == Math.abs(tableroACorregir[cont3][cont4]) && cont3 != cont4) {
+                        if (filaExtraida[cont4] == Math.abs(tableroACorregir[cont3][cont4])) {
                                 repeticionEnFila++;
 
                             if (repeticionEnFila == tableroACorregir.length) {
@@ -525,7 +534,7 @@ public class practicaDefinitiva {
                         }
 
                         // Compruebo si la fila es igual a otra en el tablero
-                        if (columnaExtraida[cont4] == Math.abs(tableroACorregir[cont4][cont3]) && cont3 != cont4) {
+                        if (columnaExtraida[cont4] == Math.abs(tableroACorregir[cont4][cont3])) {
                             repeticionEnColumna++;
 
                             if (repeticionEnColumna == tableroACorregir.length) {
