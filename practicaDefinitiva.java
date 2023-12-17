@@ -215,7 +215,13 @@ public class practicaDefinitiva {
             if (!jugada.equals("finPartida")) {
                 fila = extraeFila(jugada);
                 columna = extraeColumna(jugada);
-                tablero = realizarJugada(fila, columna, tablero);
+
+                if(jugada.equals("-")){
+
+                }else{
+                    tablero = realizarJugada(fila, columna, tablero);
+                }
+                
 
                 System.out.println(); // Salto de linea
                 System.out.println(); // Salto de linea
@@ -237,23 +243,23 @@ public class practicaDefinitiva {
                     contPartidas++;
                     limpiadorTerminal();
 
+
                     // Si todas las verificaciones son validas, es una victoria
+                    System.out.println("Resumen de las reglas del tablero finalizado: ");
+                    System.out.println();
                     if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero) && compruebaColumnasRepetidas(tablero)){
                         contadorVictorias++;
                     }
 
-                    System.out.println("Has jugado un total de: " + contPartidas + " tableros.");
+                    System.out.println();
+                    System.out.println();
+                    System.out.println();
 
                 } else {
                     limpiadorTerminal();
 
                     System.out.println("¿Sera un tablero valido segun las normas?");
                     System.out.println();
-
-                    tableroRellenado(tablero);
-                    tresElementosIguales(tablero);
-                    compruebaFilasRepetidas(tablero);
-                    compruebaColumnasRepetidas(tablero);
 
                     System.out.println();
                     System.out.println();
@@ -319,8 +325,6 @@ public class practicaDefinitiva {
         String lineaElegida = lineaLeida[(int) (Math.random() * lineaLeida.length)];
 
         String linea = lineaElegida.replaceAll("\\s", "");
-
-        System.out.println(linea);
 
         // Creo el array elementos que almacena cada caracter de linea de forma
         // independiente
@@ -470,15 +474,7 @@ public class practicaDefinitiva {
         return tableroJuego;
     }
 
-    // Funcion que se encarga de almacenar los movimientos realizados
-    public static int[][][] registroJugadasRealizadas(int contadorMovimientos, int[][] tablero, int[][][]tablerosAnteriores){  // Almacena las "jugadas" del usuario.
-    for(int fila = 0; fila  < tablero.length ;fila++){
-        for(int columna = 0; columna < tablero.length; columna++){
-            tablerosAnteriores[columna][fila][contadorMovimientos] = tablero[columna][fila];
-        }
-    }
-    return tablerosAnteriores;
-}
+
 
     // Funcion que almacena las jugadas del usuario
     public static int[] almacenaJugadasUsuario(int fila, int columna, int[] almacenJugadas, int contadorJugadas){
@@ -541,11 +537,21 @@ public class practicaDefinitiva {
             }
         }
 
+        if(validoFila){
+            System.out.println("Hay 3 elementos iguales seguidos en una columna.");
+        }else{
+            System.out.println("No hay 3 elementos iguales seguidos en una columna.");
+        }
+
+        if(validoColumna){
+            System.out.println("Hay 3 elementos iguales seguidos en una columna.");
+        }else{
+            System.out.println("No hay 3 elementos iguales seguidos en una columna.");
+        }
+
         if (validoFila && validoColumna) {
-            System.out.println("Hay 3 elementos iguales en la fila o la columna");
             return true;
         } else {
-            System.out.println("No hay 3 elementos iguales en la fila o la columna.");
             return false;
         }
     }
