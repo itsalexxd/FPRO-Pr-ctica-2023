@@ -196,8 +196,6 @@ public class practicaDefinitiva {
 
         while (!finPartida) {
             jugada = "";
-            fila = 0;
-            columna = 0;
             finPartida = false;
 
             tableroJuego = generadorTablero(tableroJuego);
@@ -506,99 +504,32 @@ public class practicaDefinitiva {
             return false;
         }
     }
-
-    // Hay 2 filas o columnas iguales
-    public static boolean filasOColumnasIguales(int[][] tableroACorregir) {
-        boolean filasRepetidas = false;
-        boolean columnasRepetidas = false;
-        int repeticionEnFila = 0;
-        int repeticionEnColumna = 0;
-
-        int[] filaExtraida = new int[tableroACorregir.length];
-        int[] columnaExtraida = new int[tableroACorregir.length];
-
-        int indice = 0;
-
-        // Primero: Extraigo la fila y columna que quiero comprobar si se repiten
-        for (int fila = 0; fila < tableroACorregir.length; fila++) {
-            repeticionEnFila = 0;
-            repeticionEnColumna = 0;
-
-            for (int columna = 0; columna < tableroACorregir.length; columna++) {
-                // Extraigo la fila a comprobar
-                filaExtraida[columna] = Math.abs(tableroACorregir[fila][columna]);
-                // Extraigo la columna a comprobar
-                columnaExtraida[columna] = Math.abs(tableroACorregir[columna][fila]);
-
-                indice = fila;
-            }
-        }
-
-            // Segundo: Recorro el tablero en busca de si se repiten la fila o la columna
-            for (int fila2 = 0; fila2 < tableroACorregir.length; fila2++) {
-                for (int columna2 = 0; columna2 < tableroACorregir.length; columna2++) {
-
-                    if(fila2 != indice){
-                        // Compruebo si la fila es igual a otra en el tablero
-                        if (filaExtraida[columna2] == Math.abs(tableroACorregir[fila2][columna2])) {
-                                repeticionEnFila++;
-
-                            if (repeticionEnFila == tableroACorregir.length) {
-                                filasRepetidas = true;
-                            }
-                        }
-
-                        // Compruebo si la fila es igual a otra en el tablero
-                        if (columnaExtraida[columna2] == Math.abs(tableroACorregir[columna2][fila2])) {
-                            repeticionEnColumna++;
-
-                            if (repeticionEnColumna == tableroACorregir.length) {
-                                columnasRepetidas = true;
-                            }
-                        }
-                    }
-
-                }
-            }
-
-        if (filasRepetidas) {
-            System.out.println("Se repite al menos una fila.");
-        }else{
-            System.out.println("No se repite ninguna fila");
-        }
-
-        if (columnasRepetidas) {
-            System.out.println("Se repite al menos una columna.");
-        }else{
-            System.out.println("No se repite ninguna columna");
-        }
-
-
-        if (filasRepetidas && columnasRepetidas) {
-            return false;
-        } else {
-            return true;
-        }
-
-    }
     
+    // Compruebo si hay filas iguales
+    public static boolean compruebaFilasRepetidas(int[][] tablero){  
+        // Elegimos la fila que queremos comparar
+        for (int filaInicial = 0; filaInicial < tablero.length - 1; filaInicial++){
 
-    public static boolean filasIguales(int[][] tablero){  
-        for (int filaBase = 0; filaBase < tablero.length-1; filaBase++){ // Elegir fila base
-            for(int filaComparada = filaBase + 1; filaComparada < tablero.length; filaComparada++){ // Elegir fila a comparar
-                int casillasIguales = 0;
-                for(int columna = 0; columna < tablero.length; columna++){ // Comparar elementos de cada fila
-                    if(tablero[columna][filaBase] == tablero[columna][filaComparada]){
-                        casillasIguales++;
+            // Elegimos la fila con la que vamos a comparar
+            for(int filaComparar = filaInicial + 1; filaComparar < tablero.length; filaComparar++){
+                // Creo una variable que lleve la cuenta de los elementos iguales
+                int elementosIguales = 0;
+
+                // Comparamos cada elemento
+                for(int columna = 0; columna < tablero.length; columna++){
+                    if(tablero[columna][filaInicial] == tablero[columna][filaComparar]){
+                        elementosIguales++;
                     }
                 }
-                if(casillasIguales == tablero.length){
+                if(elementosIguales == tablero.length){
                     return true;
                 }
             }
         }
         return false;
     }
+
+    // Compruebo si hay columnas iguales
     public static boolean columnasIguales(int[][]tablero){
         for (int columnaBase = 0; columnaBase < tablero.length-1; columnaBase++){ // Elegir columna base
             for(int columnaComparada = columnaBase+1; columnaComparada < tablero.length; columnaComparada++){ // Elegir columna a comparar
