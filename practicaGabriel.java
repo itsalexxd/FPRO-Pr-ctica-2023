@@ -27,7 +27,6 @@ public class practicaGabriel {
 
             do {
                 // GENERACIÓN DEL TABLERO
-
                 // Genera un número aleatorio para elegir un tablero de los disponibles.
                 int tableroRandom = (int) (Math.random() * (numLineasTXT));
                 // CODIGO (String) del TABLERO INICIAL ACTUAL.
@@ -277,11 +276,8 @@ public class practicaGabriel {
         return true;
     }
 
-    public static int[][][] registroJugadas(int contadorMovimientos, int[][] tablero, int[][][] tablerosAnteriores) { // Almacena
-                                                                                                                      // las
-                                                                                                                      // "jugadas"
-                                                                                                                      // del
-                                                                                                                      // usuario.
+    // Almacena las jugadas del usuario
+    public static int[][][] registroJugadas(int contadorMovimientos, int[][] tablero, int[][][] tablerosAnteriores) { 
         for (int fila = 0; fila < tablero.length; fila++) {
             for (int columna = 0; columna < tablero.length; columna++) {
                 tablerosAnteriores[columna][fila][contadorMovimientos] = tablero[columna][fila];
@@ -290,15 +286,8 @@ public class practicaGabriel {
         return tablerosAnteriores;
     }
 
-    public static int[][] jugadaAnterior(int[][][] tablerosAnteriores, int[][] tablero, int contadorMovimientos) { // Devuelve
-                                                                                                                   // el
-                                                                                                                   // tablero
-                                                                                                                   // con
-                                                                                                                   // la
-                                                                                                                   // "jugada"
-                                                                                                                   // anterior
-                                                                                                                   // del
-                                                                                                                   // usuario.
+    // Devuelve el tablero con la jugada anterior
+    public static int[][] jugadaAnterior(int[][][] tablerosAnteriores, int[][] tablero, int contadorMovimientos) {
         for (int fila = 0; fila < tablero.length; fila++) {
             for (int columna = 0; columna < tablero.length; columna++) {
                 tablero[columna][fila] = tablerosAnteriores[columna][fila][contadorMovimientos];

@@ -180,6 +180,8 @@ public class practicaDefinitiva {
             }
         }
 
+        limpiadorTerminal();
+
         // Variable que nos permite controlar el bucle while
         boolean volverJugar = false;
 
@@ -191,37 +193,9 @@ public class practicaDefinitiva {
         int columna = 0;
         boolean finPartida = false;
 
-        int contadorIntentos = 0;
-        int contadorVictorias= 0;
-        int porcentajeVictorias=0;
-
-
-        do{
-            // Generamos el tablero principal
-            generadorTablero(tablero);
-        }while(volverJugar);
-
-
-        // Fin del juego (del bucle del programa)
-        scanner.close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        limpiadorTerminal();
+        int contPartidas = 0;
+        int contadorVictorias = 0;
+        int porcentajeVictorias = 0;
 
 
 
@@ -229,8 +203,8 @@ public class practicaDefinitiva {
             jugada = "";
             finPartida = false;
 
-            tableroJuego = generadorTablero(tableroJuego);
-            mostrarTablero(tableroJuego);
+            tablero = generadorTablero(tablero);
+            mostrarTablero(tablero);
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
 
@@ -239,17 +213,17 @@ public class practicaDefinitiva {
                 fila = extraeFila(jugada);
                 columna = extraeColumna(jugada);
 
-                tableroJuego = realizarJugada(fila, columna, tableroJuego);
+                tablero = realizarJugada(fila, columna, tablero);
 
                 System.out.println(); // Salto de linea
                 System.out.println(); // Salto de linea
                 System.out.println(); // Salto de linea
 
-                mostrarTablero(tableroJuego);
-            } else if(jugada.equals("-")) {
-                
+                mostrarTablero(tablero);
+            
             }else {
 
+                System.out.println("Va a finalizar la partida, ¿Esta seguro de hacerlo?");
             
                 // Pregunto si quiere volver a jugar
                 System.out.println("¿Quieres volver a jugar?");
@@ -258,14 +232,15 @@ public class practicaDefinitiva {
 
                 if (jugada.equals("Si")) {
                     // Sumo un intento a la partida
-                    contadorIntentos++;
+                    contPartidas++;
                     limpiadorTerminal();
 
-                    if (tableroRellenado(tableroJuego) && tresElementosIguales(tableroJuego) && compruebaFilasRepetidas(tableroJuego) && compruebaColumnasRepetidas(tableroJuego)){
+                    // Si todas las verificaciones son validas, es una victoria
+                    if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero) && compruebaColumnasRepetidas(tablero)){
                         contadorVictorias++;
                     }
 
-                    System.out.println("Has jugado un total de: " + contadorIntentos + " tableroso.");
+                    System.out.println("Has jugado un total de: " + contPartidas + " tableros.");
 
                 } else {
                     limpiadorTerminal();
@@ -273,17 +248,17 @@ public class practicaDefinitiva {
                     System.out.println("¿Sera un tablero valido segun las normas?");
                     System.out.println();
 
-                    tableroRellenado(tableroJuego);
-                    tresElementosIguales(tableroJuego);
-                    compruebaFilasRepetidas(tableroJuego);
-                    compruebaColumnasRepetidas(tableroJuego);
+                    tableroRellenado(tablero);
+                    tresElementosIguales(tablero);
+                    compruebaFilasRepetidas(tablero);
+                    compruebaColumnasRepetidas(tablero);
 
                     System.out.println();
                     System.out.println();
 
                     System.out.println("Tus estadisticas son: ");
-                    System.out.println("Tableros jugados: " + contadorIntentos);
-                    porcentajeVictorias=(int)(((double)contadorVictorias)/((double)contadorIntentos)) * 100;
+                    System.out.println("Tableros jugados: " + contPartidas);
+                    porcentajeVictorias=(int)(((double)contadorVictorias)/((double)contPartidas)) * 100;
                     System.out.println("Porcentaje de victorias: " + porcentajeVictorias + "%");
                     System.out.println("Nos vemos en la proxima partida!!");
 
@@ -405,7 +380,6 @@ public class practicaDefinitiva {
 
         if (jugada.equals("")) {
             jugada = "finPartida";
-            System.out.println(jugada);
             return jugada;
 
         } else {
@@ -497,7 +471,7 @@ public class practicaDefinitiva {
     }
 
     // Funcion que se encarga de almacenar los movimientos realizados
-    public static int[][][] registroJugadas(int contadorMovimientos, int[][] tablero, int[][][]tablerosAnteriores){  // Almacena las "jugadas" del usuario.
+    public static int[][][] registroJugadasRealizadas(int contadorMovimientos, int[][] tablero, int[][][]tablerosAnteriores){  // Almacena las "jugadas" del usuario.
     for(int fila = 0; fila  < tablero.length ;fila++){
         for(int columna = 0; columna < tablero.length; columna++){
             tablerosAnteriores[columna][fila][contadorMovimientos] = tablero[columna][fila];
@@ -506,24 +480,11 @@ public class practicaDefinitiva {
     return tablerosAnteriores;
 }
 
-    // Funcion que almacena las jugadas realizadas por el usuario
-    public static int[][][] almacenarJugadasRealizadas(int contJugadas, int[][] tablero, int[][][] tablerosAnteriores){
-        for(int fila = 0; fila  < tablero.length ;fila++){
-            for(int columna = 0; columna < tablero.length; columna++){
-                tablerosAnteriores[columna][fila][contJugadas] = tablero[columna][fila];
-            }
-        }
-        return tablerosAnteriores;
-    }
-
-    // Funcion que recupera la jugada inmediatamente anterior
-    public static int[][] recuperaJugada(int[][][]tablerosAnteriores, int[][]tableroAnterior, int contJugadas){
-        for(int fila = 0; fila  < tableroAnterior.length ;fila++){
-            for(int columna = 0; columna < tableroAnterior.length; columna++){
-                tableroAnterior[columna][fila] = tablerosAnteriores[columna][fila][contJugadas];
-            }
-        }
-        return tableroAnterior;
+    // Funcion que almacena las jugadas del usuario
+    public static int[] almacenaJugadasUsuario(int fila, int columna, int[] jugadas){
+        
+        
+        return jugadas;
     }
 
     // Funcion que comprueba si el tablero esta completo o no
