@@ -200,7 +200,7 @@ public class practicaDefinitiva {
 
             tableroJuego = generadorTablero(tableroJuego);
             mostrarTablero(tableroJuego);
-            System.out.print("Por favor, inserte la jugada que desea realizar: ");
+            System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
 
             if (!jugada.equals("finPartida")) {
@@ -245,10 +245,10 @@ public class practicaDefinitiva {
                     System.out.println();
                     System.out.println();
 
-                    System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
-
+                    System.out.println("Tus estadisticas son: ");
+                    System.out.println("Tableros jugados: " + contadorIntentos);
                     porcentajeVictorias=(int)(((double)contadorVictorias)/((double)contadorIntentos)) * 100;
-                    System.out.println("Tu porcentaje de victorias es del: " + porcentajeVictorias + "%");
+                    System.out.println("Porcentaje de victorias: " + porcentajeVictorias + "%");
                     System.out.println("Nos vemos en la proxima partida!!");
 
                     finPartida = true;
@@ -460,6 +460,18 @@ public class practicaDefinitiva {
         return tableroJuego;
     }
 
+    // Funcion que se encarga de almacenar los movimientos realizados
+    public static int[][][] registroJugadas(int contadorMovimientos, int[][] tablero, int[][][]tablerosAnteriores){  // Almacena las "jugadas" del usuario.
+    for(int fila = 0; fila  < tablero.length ;fila++){
+        for(int columna = 0; columna < tablero.length; columna++){
+            tablerosAnteriores[columna][fila][contadorMovimientos] = tablero[columna][fila];
+        }
+    }
+    return tablerosAnteriores;
+}
+
+    
+
     // Funcion que comprueba si el tablero esta completo o no
     public static boolean tableroRellenado(int[][] tableroACorregir) {
         for (int cont = 0; cont < tableroACorregir.length * tableroACorregir.length; cont++) {
@@ -523,13 +535,14 @@ public class practicaDefinitiva {
 
                 // Comparamos cada elemento
                 for(int cont = 0; cont < tablero.length; cont++){
-                    if(Math.abs(tablero[cont][filaInicial]) == Math.abs(tablero[cont][filaComparar])){
+                    if(Math.abs(tablero[filaInicial][cont]) == Math.abs(tablero[filaComparar][cont])){
                         elementosIguales++;
                     }
                 }
                 if(elementosIguales == tablero.length){
                     System.out.println("Se repite al menos una fila");
-                    return true;
+                    // Tiene filas repetidas
+                    return true; 
                 }
             }
         }
