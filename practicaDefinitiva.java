@@ -503,23 +503,18 @@ public class practicaDefinitiva {
             repeticionEnFila = 0;
             repeticionEnColumna = 0;
 
-            // Extraigo la fila en cuestion
             for (int cont2 = 0; cont2 < tableroACorregir.length; cont2++) {
-
                 // Extraigo la fila a comprobar
                 filaExtraida[cont2] = Math.abs(tableroACorregir[cont][cont2]);
-
                 // Extraigo la columna a comprobar
                 columnaExtraida[cont2] = Math.abs(tableroACorregir[cont2][cont]);
-
             }
             // Segundo: Recorro el tablero en busca de si se repiten las filas o las
             // columnas
             for (int cont3 = 0; cont3 < tableroACorregir.length; cont3++) {
-
                 for (int cont4 = 0; cont4 < tableroACorregir.length; cont4++) {
                     // Compruebo si la fila es igual a otra en el tablero
-                    if (filaExtraida[cont4] == Math.abs(tableroACorregir[cont3][cont4])) {
+                    if (filaExtraida[cont4] == Math.abs(tableroACorregir[cont3][cont4]) && cont4 != cont3) {
                         repeticionEnFila++;
 
                         if (repeticionEnFila == tableroACorregir.length) {
