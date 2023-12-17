@@ -185,8 +185,6 @@ public class practicaDefinitiva {
         // Creo una matriz que almacene al tablero
         int[][] tableroJuego = new int[6][6];
 
-        tableroJuego = generadorTablero(tableroJuego);
-        mostrarTablero(tableroJuego);
         String jugada = "";
         int fila = 0;
         int columna = 0;
@@ -194,12 +192,20 @@ public class practicaDefinitiva {
 
         int contadorIntentos = 0;
         int contadorVictorias= 0;
+        int porcentajeVictorias=0;
 
         while (!finPartida) {
+            jugada = "";
+            fila = 0;
+            columna = 0;
+            finPartida = false;
+
+            tableroJuego = generadorTablero(tableroJuego);
+            mostrarTablero(tableroJuego);
             System.out.print("Por favor, inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
 
-            if (jugada != "finPartida") {
+            if (!jugada.equals("finPartida")) {
                 fila = extraeFila(jugada);
                 columna = extraeColumna(jugada);
 
@@ -235,6 +241,10 @@ public class practicaDefinitiva {
                     filasOColumnasIguales(tableroJuego);
 
                     System.out.println("Has jugado un total de: " + contadorIntentos + " tableros.");
+
+                    porcentajeVictorias=(int)(((double)contadorVictorias)/((double)contadorIntentos)) * 100;
+
+                    System.out.println("Tu porcentaje de victorias es" + porcentajeVictorias + "%");
                     System.out.println("Nos vemos en la proxima partida!!");
 
                     finPartida = true;
@@ -501,11 +511,13 @@ public class practicaDefinitiva {
     public static boolean filasOColumnasIguales(int[][] tableroACorregir) {
         boolean filasRepetidas = false;
         boolean columnasRepetidas = false;
-        int repeticionEnFila;
-        int repeticionEnColumna;
+        int repeticionEnFila = 0;
+        int repeticionEnColumna = 0;
 
         int[] filaExtraida = new int[tableroACorregir.length];
         int[] columnaExtraida = new int[tableroACorregir.length];
+
+        int indice = 0;
 
         // Primero: Extraigo la fila y columna que quiero comprobar si se repiten
         for (int fila = 0; fila < tableroACorregir.length; fila++) {
@@ -517,14 +529,16 @@ public class practicaDefinitiva {
                 filaExtraida[columna] = Math.abs(tableroACorregir[fila][columna]);
                 // Extraigo la columna a comprobar
                 columnaExtraida[columna] = Math.abs(tableroACorregir[columna][fila]);
+
+                indice = fila;
             }
+        }
+
             // Segundo: Recorro el tablero en busca de si se repiten la fila o la columna
             for (int fila2 = 0; fila2 < tableroACorregir.length; fila2++) {
                 for (int columna2 = 0; columna2 < tableroACorregir.length; columna2++) {
 
-                    if(fila2 != fila){
-                        // System.out.println("No se repite el contador");
-                        
+                    if(fila2 != indice){
                         // Compruebo si la fila es igual a otra en el tablero
                         if (filaExtraida[columna2] == Math.abs(tableroACorregir[fila2][columna2])) {
                                 repeticionEnFila++;
@@ -542,14 +556,10 @@ public class practicaDefinitiva {
                                 columnasRepetidas = true;
                             }
                         }
-                    }else {
-                        // System.out.println("Se repite el contador");
                     }
 
                 }
             }
-
-        }
 
         if (filasRepetidas) {
             System.out.println("Se repite al menos una fila.");
@@ -563,7 +573,6 @@ public class practicaDefinitiva {
             System.out.println("No se repite ninguna columna");
         }
 
-        
 
         if (filasRepetidas && columnasRepetidas) {
             return false;
@@ -571,5 +580,39 @@ public class practicaDefinitiva {
             return true;
         }
 
+    }
+    
+
+    public static boolean filasIguales(int[][] tablero){  
+        for (int filaBase = 0; filaBase < tablero.length-1; filaBase++){ // Elegir fila base
+            for(int filaComparada = filaBase + 1; filaComparada < tablero.length; filaComparada++){ // Elegir fila a comparar
+                int casillasIguales = 0;
+                for(int columna = 0; columna < tablero.length; columna++){ // Comparar elementos de cada fila
+                    if(tablero[columna][filaBase] == tablero[columna][filaComparada]){
+                        casillasIguales++;
+                    }
+                }
+                if(casillasIguales == tablero.length){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean columnasIguales(int[][]tablero){
+        for (int columnaBase = 0; columnaBase < tablero.length-1; columnaBase++){ // Elegir columna base
+            for(int columnaComparada = columnaBase+1; columnaComparada < tablero.length; columnaComparada++){ // Elegir columna a comparar
+                int casillasIguales = 0;
+                for(int fila = 0; fila < tablero.length; fila++){ // Comparar elementos de cada columna
+                    if(tablero[columnaBase][fila] == tablero[columnaComparada][fila]){
+                        casillasIguales++;
+                    }
+                }
+                if(casillasIguales == tablero.length){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
