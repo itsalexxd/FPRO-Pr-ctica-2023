@@ -187,6 +187,9 @@ public class practicaDefinitiva {
 
         // Creo una matriz que almacene al tablero
         int[][] tablero = new int[6][6];
+        // Array que almacena las jugadas
+        int[] almacenJugadas = new int[100];
+        int contadorJugadas = 100;
 
         String jugada = "";
         int fila = 0;
@@ -212,7 +215,6 @@ public class practicaDefinitiva {
             if (!jugada.equals("finPartida")) {
                 fila = extraeFila(jugada);
                 columna = extraeColumna(jugada);
-
                 tablero = realizarJugada(fila, columna, tablero);
 
                 System.out.println(); // Salto de linea
@@ -468,18 +470,6 @@ public class practicaDefinitiva {
         return tableroJuego;
     }
 
-    // Funcion que se encarga de insertar las jugadas
-    public static int[][] recuperarJugada(int fila, int columna, int[][] tableroJuego) {
-        // Compruebo que valor es la posicion y modifico en funcion del que sea
-        if (tableroJuego[fila][columna] < 0) {
-            System.out.print("Esa casilla no se puede editar...");
-        } else {
-            tableroJuego[fila][columna] = (tableroJuego[fila][columna] - 1) % 3;
-        }
-
-        return tableroJuego;
-    }
-
     // Funcion que se encarga de almacenar los movimientos realizados
     public static int[][][] registroJugadasRealizadas(int contadorMovimientos, int[][] tablero, int[][][]tablerosAnteriores){  // Almacena las "jugadas" del usuario.
     for(int fila = 0; fila  < tablero.length ;fila++){
@@ -491,10 +481,22 @@ public class practicaDefinitiva {
 }
 
     // Funcion que almacena las jugadas del usuario
-    public static int[] almacenaJugadasUsuario(int fila, int columna, int[] jugadas){
-        
-        
-        return jugadas;
+    public static int[] almacenaJugadasUsuario(int fila, int columna, int[] almacenJugadas, int contadorJugadas){
+        int jugadaConjunta = (fila * 10) + columna;
+        almacenJugadas[contadorJugadas] = jugadaConjunta;
+        return almacenJugadas;
+    }
+
+    // Funcion que se encarga de insertar las jugadas
+    public static int[][] recuperarJugada(int fila, int columna, int[][] tableroJuego) {
+        // Compruebo que valor es la posicion y modifico en funcion del que sea
+        if (tableroJuego[fila][columna] < 0) {
+            System.out.print("Esa casilla no se puede editar...");
+        } else {
+            tableroJuego[fila][columna] = (tableroJuego[fila][columna] - 1) % 3;
+        }
+
+        return tableroJuego;
     }
 
     // Funcion que comprueba si el tablero esta completo o no
