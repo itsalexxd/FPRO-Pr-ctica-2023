@@ -210,12 +210,15 @@ public class practicaDefinitiva {
             mostrarTablero(tablero);
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
+            contadorJugadas++;
 
 
             if (!jugada.equals("finPartida")) {
                 fila = extraeFila(jugada);
                 columna = extraeColumna(jugada);
 
+                almacenaJugadasUsuario(fila, columna, almacenJugadas, contadorJugadas);
+                
                 if(jugada.equals("-")){
 
                 }else{
@@ -260,6 +263,10 @@ public class practicaDefinitiva {
 
                     System.out.println("¿Sera un tablero valido segun las normas?");
                     System.out.println();
+                    tableroRellenado(tablero);
+                    tresElementosIguales(tablero);
+                    compruebaFilasRepetidas(tablero);
+                    compruebaColumnasRepetidas(tablero);
 
                     System.out.println();
                     System.out.println();
@@ -281,7 +288,7 @@ public class practicaDefinitiva {
     }
 
     // #################################### //
-    // ########## M E T O D O S ########### //
+    // ########## M E T O D 0 S ########### //
     // #################################### //
 
     // Funcion que limpia la terminal
@@ -520,8 +527,8 @@ public class practicaDefinitiva {
 
         // Compruebo si hay mas de 3 elementos iguales en cada fila
         for (int cont = 0; cont < tableroACorregir.length / 2; cont++) {
-            int fila = cont % 6;
-            int columna = cont / 6;
+            int fila = cont % tableroACorregir.length;
+            int columna = cont / tableroACorregir.length;
 
             // Para la fila
             int elementoComprobar = tableroACorregir[fila][columna];
