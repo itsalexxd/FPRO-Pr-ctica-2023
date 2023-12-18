@@ -100,21 +100,26 @@ public class practicaDefinitiva {
                     System.out.print("La forma de jugar es la siguiente: ");
                     System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
-                    System.out.print(
-                            "Paso 1: Se te pedira que insertes las dimensiones del tablero que desea, el numero ha de ser par. ");
+                    System.out
+                            .println("Paso 1: Se te pedira la jugada que desea realizar, ha de ser del formato 'nC' ");
+                    System.out.println("    n -> Es un numero correspondiente a la fila");
+                    System.out.println("    C -> Letra MAYUSCULA correspondiente a las columnas.");
                     System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
                     System.out.println(
-                            "Paso 2: Se te generara el tablero de juego y tendras que insertar la jugada que desees realizar.");
+                            "Paso 2: Justo debajo, te aparecera el tablero con el movimiento realizado y te volvera a pedir la jugada que desea realizar.");
                     System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
                     System.out.print(
                             "Paso 3: Para realizar las jugadas, insertara las coordenadas primero indicando la fila y luego la columna (3C).");
                     System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
-                    System.out.print("Paso 4: Para finalizar la partida, pulse 'intro'.");
+                    System.out.print("Paso 4: Si quiere volver atras en las jugadas, inserte '-'.");
                     System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
+                    System.out.print("Paso 5: Para finalizar la partida, pulse 'intro'.");
+                    System.out.println();
+                    System.out.println();
                     System.out.print("Inserte '0' para volver al menu anterior: ");
 
                     opcionMenu = scanner.nextInt();
@@ -194,8 +199,8 @@ public class practicaDefinitiva {
         boolean finPartida = false;
 
         int contPartidas = 1;
-        int contadorVictorias = 0;
-        int porcentajeVictorias = 0;
+        int contVictorias = 0;
+        double porcentajeVictorias = 0;
 
         tablero = generadorTablero(tablero);
         mostrarTablero(tablero);
@@ -206,6 +211,7 @@ public class practicaDefinitiva {
 
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
+            contadorJugadas--;
 
             if (!jugada.equals("finPartida")) {
                 // Retrocedemos una la jugada tantas veces como el usuario quiera
@@ -219,7 +225,6 @@ public class practicaDefinitiva {
                     columna = extraeColumna(jugada);
 
                     almacenaJugadasUsuario(fila, columna, almacenJugadas, contadorJugadas);
-                    contadorJugadas--;
                     tablero = realizarJugada(fila, columna, tablero);
                 }
 
@@ -237,7 +242,7 @@ public class practicaDefinitiva {
                 System.out.println("Si / No: ");
                 jugada = scanner.next();
 
-                if (jugada.equals("Si")) {
+                if (jugada.equals("Si") || jugada.equals("sI") || jugada.equals("si") || jugada.equals("SI")) {
                     // Sumo un intento a la partida
                     contPartidas++;
                     limpiadorTerminal();
@@ -247,7 +252,10 @@ public class practicaDefinitiva {
                     System.out.println();
                     if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero)
                             && compruebaColumnasRepetidas(tablero)) {
-                        contadorVictorias++;
+                        contVictorias++;
+                        System.out.println("¡¡ ENHORABUENA !!");
+                        System.out.println("El tablero es valido");
+                        System.out.println("Victorias: " + contVictorias);
                     }
 
                     System.out.println();
@@ -262,17 +270,21 @@ public class practicaDefinitiva {
 
                     System.out.println("¿Sera un tablero valido segun las normas?");
                     System.out.println();
-                    tableroRellenado(tablero);
-                    tresElementosIguales(tablero);
-                    compruebaFilasRepetidas(tablero);
-                    compruebaColumnasRepetidas(tablero);
+
+                    if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero)
+                            && compruebaColumnasRepetidas(tablero)) {
+                        contVictorias++;
+                        System.out.println("¡¡ ENHORABUENA  !!");
+                        System.out.println("El tablero es valido");
+                        System.out.println("Victorias: " + contVictorias);
+                    }
 
                     System.out.println();
                     System.out.println();
 
                     System.out.println("Tus estadisticas son: ");
                     System.out.println("Tableros jugados: " + contPartidas);
-                    porcentajeVictorias = (int) (((double) contadorVictorias) / ((double) contPartidas)) * 100;
+                    porcentajeVictorias = (((double) contVictorias) / ((double) contPartidas)) * 100;
                     System.out.println("Porcentaje de victorias: " + porcentajeVictorias + "%");
 
                     System.out.println();
@@ -307,7 +319,7 @@ public class practicaDefinitiva {
         String rutaArchivo = "C:\\Users\\Alex\\Documents\\GitHub\\FPRO-Pr-ctica-2023\\tableros.txt";
 
         // Variable para almacenar la linea leida del archivo
-        String[] lineaLeida = new String[24];
+        String[] lineaLeida = new String[1];
 
         // Abro el archivo
         try {
@@ -535,36 +547,34 @@ public class practicaDefinitiva {
         boolean validoColumna = true;
 
         // Compruebo si hay mas de 3 elementos iguales en cada fila
-        for (int cont = 0; cont < tableroACorregir.length / 2; cont++) {
-            int fila = cont % tableroACorregir.length;
-            int columna = cont / tableroACorregir.length;
-
-            // Para la fila
-            int elementoComprobar = tableroACorregir[fila][columna];
-            if (elementoComprobar == tableroACorregir[fila][columna + 1]
-                    && elementoComprobar == tableroACorregir[fila][columna + 2]) {
-                validoFila = false;
-            }
-
-            // Para la columna
-            if (elementoComprobar == tableroACorregir[fila + 1][columna]
-                    && elementoComprobar == tableroACorregir[fila + 2][columna]) {
-                validoColumna = false;
+        for (int fila = 0; fila < tableroACorregir.length / 2; fila++) {
+            for (int columna = 0; columna < tableroACorregir.length / 2; columna++) {
+                // Comparo la posicion actual, con las 2 siguientes
+                // Para la fila
+                if (tableroACorregir[fila][columna] == tableroACorregir[fila][columna + 1]
+                        && tableroACorregir[fila][columna] == tableroACorregir[fila][columna + 2]) {
+                    validoFila = false;
+                }
+                // Para la columna
+                if (tableroACorregir[columna][fila] == tableroACorregir[columna][fila + 1]
+                        && tableroACorregir[columna][fila] == tableroACorregir[columna][fila + 2]) {
+                    validoColumna = false;
+                }
             }
         }
 
-        if (validoFila) {
+        // Muestro los mensajes correspondientes
+        if (!validoFila) {
             System.out.println("Hay 3 elementos iguales seguidos en una fila.");
         } else {
             System.out.println("No hay 3 elementos iguales seguidos en una fila.");
         }
 
-        if (validoColumna) {
+        if (!validoColumna) {
             System.out.println("Hay 3 elementos iguales seguidos en una columna.");
         } else {
             System.out.println("No hay 3 elementos iguales seguidos en una columna.");
         }
-
         if (validoFila && validoColumna) {
             return true;
         } else {
@@ -605,23 +615,24 @@ public class practicaDefinitiva {
         for (int columnaInicial = 0; columnaInicial < tablero.length - 1; columnaInicial++) {
 
             // Elegimos la fila con la que vamos a comparar
-            for (int columnaComparar = columnaInicial + 1; columnaComparar < tablero.length; columnaComparar++) {
+            for (int columnaComprobar = columnaInicial + 1; columnaComprobar < tablero.length; columnaComprobar++) {
                 // Creo una variable que lleve la cuenta de los elementos iguales
                 int elementosIguales = 0;
 
                 // Comparamos cada elemento
                 for (int cont = 0; cont < tablero.length; cont++) {
-                    if (Math.abs(tablero[cont][columnaInicial]) == Math.abs(tablero[cont][columnaComparar])) {
+                    if (Math.abs(tablero[cont][columnaInicial]) == Math.abs(tablero[cont][columnaComprobar])) {
                         elementosIguales++;
                     }
                 }
                 if (elementosIguales == tablero.length) {
-                    System.out.println("Se repite al menos una columna");
+                    System.out.println("Se repite al menos una columna.");
+                    // Tiene filas repetidas
                     return true;
                 }
             }
         }
-        System.out.println("No se repite ninguna columna");
+        System.out.println("No se repite ninguna columna.");
         return false;
     }
 }
