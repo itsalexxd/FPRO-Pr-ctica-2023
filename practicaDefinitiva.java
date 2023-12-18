@@ -253,6 +253,10 @@ public class practicaDefinitiva {
                     if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero)
                             && compruebaColumnasRepetidas(tablero)) {
                         contVictorias++;
+
+                        System.out.println();
+                        System.out.println();
+                        
                         System.out.println("¡¡ ENHORABUENA !!");
                         System.out.println("El tablero es valido");
                         System.out.println("Victorias: " + contVictorias);
@@ -274,6 +278,10 @@ public class practicaDefinitiva {
                     if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero)
                             && compruebaColumnasRepetidas(tablero)) {
                         contVictorias++;
+
+                        System.out.println();
+                        System.out.println();
+
                         System.out.println("¡¡ ENHORABUENA  !!");
                         System.out.println("El tablero es valido");
                         System.out.println("Victorias: " + contVictorias);
@@ -316,7 +324,7 @@ public class practicaDefinitiva {
     // Funcion que genera el tablero
     public static int[][] generadorTablero(int[][] tablero) {
         // Especifico la ruta del archivo
-        String rutaArchivo = "C:\\Users\\Alex\\Documents\\GitHub\\FPRO-Pr-ctica-2023\\tableros.txt";
+        String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
 
         // Variable para almacenar la linea leida del archivo
         String[] lineaLeida = new String[1];
@@ -401,76 +409,76 @@ public class practicaDefinitiva {
     }
 
     public static String verificaJugada() {
-        // Creo el objeto scanner
-        Scanner scanner2 = new Scanner(System.in);
+        try (// Creo el objeto scanner
+        Scanner scanner2 = new Scanner(System.in)) {
+            String jugada = scanner2.nextLine();
 
-        String jugada = scanner2.nextLine();
+            if (jugada.equals("-")) {
+                return jugada;
+            }
 
-        if (jugada.equals("-")) {
-            return jugada;
-        }
+            if (jugada.equals("")) {
+                jugada = "finPartida";
+                return jugada;
 
-        if (jugada.equals("")) {
-            jugada = "finPartida";
-            return jugada;
+            } else {
+                // Creo una variable para controla el bucle
+                boolean entradaCorrecta = false;
+                // Compruebo si la entrada es correcta, en caso de que no lo sea, la vuelve ha
+                // pedir hasta que lo sea
+                while (!entradaCorrecta) {
+                    // Verifico que la entrada es valida
+                    if (jugada.length() == 2) {
+                        // Extraigo cada caracter de la entrada por separado
+                        char filaNumero = jugada.charAt(0);
+                        char columnaLetra = jugada.charAt(1);
 
-        } else {
-            // Creo una variable para controla el bucle
-            boolean entradaCorrecta = false;
-            // Compruebo si la entrada es correcta, en caso de que no lo sea, la vuelve ha
-            // pedir hasta que lo sea
-            while (!entradaCorrecta) {
-                // Verifico que la entrada es valida
-                if (jugada.length() == 2) {
-                    // Extraigo cada caracter de la entrada por separado
-                    char filaNumero = jugada.charAt(0);
-                    char columnaLetra = jugada.charAt(1);
+                        // Verifico que los caracteres son validos y se corresponde con la forma nC
+                        if (filaNumero >= '1' && filaNumero <= '6' && columnaLetra >= 'A' && columnaLetra <= 'F') {
+                            // Paso los caracteres a enteros
+                            int fila = (int) (filaNumero - '0');
+                            int columna = (int) (columnaLetra - 'A' + 1);
 
-                    // Verifico que los caracteres son validos y se corresponde con la forma nC
-                    if (filaNumero >= '1' && filaNumero <= '6' && columnaLetra >= 'A' && columnaLetra <= 'F') {
-                        // Paso los caracteres a enteros
-                        int fila = (int) (filaNumero - '0');
-                        int columna = (int) (columnaLetra - 'A' + 1);
+                            // Compruebo que los valores estan dentro del rango permitido
+                            if (fila < 1 || fila > 6) {
+                                System.out.println("La fila insertada no existe...");
+                                System.out.println("Las filas van desde la 1 hasta la 6...");
+                                System.out.println("Inserte de nuevo la jugada: ");
+                                System.out.println(); // Salto de linea
 
-                        // Compruebo que los valores estan dentro del rango permitido
-                        if (fila < 1 || fila > 6) {
-                            System.out.println("La fila insertada no existe...");
-                            System.out.println("Las filas van desde la 1 hasta la 6...");
-                            System.out.println("Inserte de nuevo la jugada: ");
+                                jugada = scanner2.nextLine();
+                            }
+                            if (columna < 1 || columna > 6) {
+                                System.out.println("La  columna insertada no existe...");
+                                System.out.println("Las columnas van desde la A hasta la F...");
+                                System.out.println("Inserte de nuevo la jugada: ");
+                                System.out.println(); // Salto de linea
+
+                                jugada = scanner2.nextLine();
+                            }
+
+                            entradaCorrecta = true;
+                            return jugada;
+
+                        } else {
+                            System.out.println("Jugada no valida, debe de ser del formato 'nC': ");
+                            System.out.println("    Donde [ n ] es un numero entre el 1 y el 6.");
+                            System.out.println("    Donde [ C ] es una letra MAYUSCULA entre la A y la F.");
                             System.out.println(); // Salto de linea
-
+                            System.out.print("Por favor, vuelva a insertar la jugada que desea realizar: ");
                             jugada = scanner2.nextLine();
                         }
-                        if (columna < 1 || columna > 6) {
-                            System.out.println("La  columna insertada no existe...");
-                            System.out.println("Las columnas van desde la A hasta la F...");
-                            System.out.println("Inserte de nuevo la jugada: ");
-                            System.out.println(); // Salto de linea
-
-                            jugada = scanner2.nextLine();
-                        }
-
-                        entradaCorrecta = true;
-                        return jugada;
 
                     } else {
-                        System.out.println("Jugada no valida, debe de ser del formato 'nC': ");
-                        System.out.println("    Donde [ n ] es un numero entre el 1 y el 6.");
-                        System.out.println("    Donde [ C ] es una letra MAYUSCULA entre la A y la F.");
-                        System.out.println(); // Salto de linea
+                        System.out.println("La longitud de la jugada insertada no es valida...");
                         System.out.print("Por favor, vuelva a insertar la jugada que desea realizar: ");
                         jugada = scanner2.nextLine();
                     }
-
-                } else {
-                    System.out.println("La longitud de la jugada insertada no es valida...");
-                    System.out.print("Por favor, vuelva a insertar la jugada que desea realizar: ");
-                    jugada = scanner2.nextLine();
                 }
+                // Cierro el objeto scanner
+                scanner2.close();
+                return jugada;
             }
-            // Cierro el objeto scanner
-            scanner2.close();
-            return jugada;
         }
 
     }
@@ -584,13 +592,14 @@ public class practicaDefinitiva {
 
     // Compruebo si hay filas iguales
     public static boolean compruebaFilasRepetidas(int[][] tablero) {
+        int elementosIguales = 0;
         // Elegimos la fila que queremos comparar
         for (int filaInicial = 0; filaInicial < tablero.length - 1; filaInicial++) {
 
             // Elegimos la fila con la que vamos a comparar
             for (int filaComparar = filaInicial + 1; filaComparar < tablero.length; filaComparar++) {
                 // Creo una variable que lleve la cuenta de los elementos iguales
-                int elementosIguales = 0;
+                elementosIguales = 0;
 
                 // Comparamos cada elemento
                 for (int cont = 0; cont < tablero.length; cont++) {
@@ -598,26 +607,27 @@ public class practicaDefinitiva {
                         elementosIguales++;
                     }
                 }
-                if (elementosIguales == tablero.length) {
-                    System.out.println("Se repite al menos una fila");
-                    // Tiene filas repetidas
-                    return true;
-                }
             }
         }
+        if (elementosIguales == tablero.length) {
+            System.out.println("Se repite al menos una fila");
+            // Tiene filas repetidas
+            return false;
+        }
         System.out.println("No se repite ninguna fila");
-        return false;
+        return true;
     }
 
     // Compruebo si hay columnas iguales
     public static boolean compruebaColumnasRepetidas(int[][] tablero) {
+        int elementosIguales = 0;
         // Elegimos la fila que queremos comparar
         for (int columnaInicial = 0; columnaInicial < tablero.length - 1; columnaInicial++) {
 
             // Elegimos la fila con la que vamos a comparar
             for (int columnaComprobar = columnaInicial + 1; columnaComprobar < tablero.length; columnaComprobar++) {
                 // Creo una variable que lleve la cuenta de los elementos iguales
-                int elementosIguales = 0;
+                elementosIguales = 0;
 
                 // Comparamos cada elemento
                 for (int cont = 0; cont < tablero.length; cont++) {
@@ -625,14 +635,14 @@ public class practicaDefinitiva {
                         elementosIguales++;
                     }
                 }
-                if (elementosIguales == tablero.length) {
-                    System.out.println("Se repite al menos una columna.");
-                    // Tiene filas repetidas
-                    return true;
-                }
             }
         }
+        if (elementosIguales == tablero.length) {
+            System.out.println("Se repite al menos una columna.");
+            // Tiene filas repetidas
+            return false;
+        }
         System.out.println("No se repite ninguna columna.");
-        return false;
+        return true;
     }
 }
