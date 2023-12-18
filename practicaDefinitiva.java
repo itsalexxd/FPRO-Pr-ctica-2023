@@ -184,7 +184,7 @@ public class practicaDefinitiva {
 
         // Creo una matriz que almacene al tablero
         int[][] tablero = new int[6][6];
-        // Array que almacena las jugadas
+        // Array que almacena las jugadas y el contador que lleva la cuenta inversa
         int[] almacenJugadas = new int[100];
         int contadorJugadas = 100;
 
@@ -206,7 +206,6 @@ public class practicaDefinitiva {
 
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
-            contadorJugadas--;
 
             if (!jugada.equals("finPartida")) {
                 // Retrocedemos una la jugada tantas veces como el usuario quiera
@@ -220,6 +219,7 @@ public class practicaDefinitiva {
                     columna = extraeColumna(jugada);
 
                     almacenaJugadasUsuario(fila, columna, almacenJugadas, contadorJugadas);
+                    contadorJugadas--;
                     tablero = realizarJugada(fila, columna, tablero);
                 }
 
