@@ -511,8 +511,17 @@ public class practicaDefinitiva {
         // Compruebo que valor es la posicion y modifico en funcion del que sea
         if (tableroJuego[fila][columna] < 0) {
             System.out.print("Esa casilla no se puede editar...");
-        } else {
-            tableroJuego[fila][columna] = (tableroJuego[fila][columna] + 1) % 3;
+        }
+
+        // Cambio los valores en funcion de lo que haya en el tablero
+        if(tableroJuego[fila][columna] == 0){
+            tableroJuego[fila][columna] = 1;
+        }
+        if(tableroJuego[fila][columna] == 1){
+            tableroJuego[fila][columna] = 2;
+        }
+        if(tableroJuego[fila][columna] == 2){
+            tableroJuego[fila][columna] = 0;
         }
 
         return tableroJuego;
@@ -534,8 +543,17 @@ public class practicaDefinitiva {
         // Compruebo que valor es la posicion y modifico en funcion del que sea
         if (tableroJuego[fila][columna] < 0) {
             System.out.print("Esa casilla no se puede editar...");
-        } else {
-            tableroJuego[fila][columna] = (tableroJuego[fila][columna] - 1) % 3;
+        }
+
+        // Cambio los valores en funcion de lo que haya en el tablero
+        if(tableroJuego[fila][columna] == 0){
+            tableroJuego[fila][columna] = 2;
+        }
+        if(tableroJuego[fila][columna] == 1){
+            tableroJuego[fila][columna] = 0;
+        }
+        if(tableroJuego[fila][columna] == 2){
+            tableroJuego[fila][columna] = 1;
         }
 
         return tableroJuego;
