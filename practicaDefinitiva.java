@@ -211,21 +211,20 @@ public class practicaDefinitiva {
 
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
-            
 
             if (!jugada.equals("finPartida")) {
                 // Retrocedemos una la jugada tantas veces como el usuario quiera
                 if (jugada.equals("-")) {
-                    // Almaceno la jugada realizada 
+                    // Almaceno la jugada realizada
                     int jugadaAnterior = almacenJugadas[contadorJugadas + 1];
 
                     // Extraigo la fila y la columna
                     fila = jugadaAnterior % 10;
                     columna = jugadaAnterior / 10;
 
-                    // 
+                    //
                     recuperarJugada(fila, columna, tablero);
-                    
+
                 } else {
                     // Extraigo la fila y la columna
                     fila = extraeFila(jugada);
@@ -268,7 +267,7 @@ public class practicaDefinitiva {
 
                         System.out.println();
                         System.out.println();
-                        
+
                         System.out.println("¡¡ ENHORABUENA !!");
                         System.out.println("El tablero es valido");
                         System.out.println("Victorias: " + contVictorias);
@@ -421,8 +420,8 @@ public class practicaDefinitiva {
     }
 
     public static String verificaJugada() {
-        // Creo el objeto scanner
-        Scanner scanner2 = new Scanner(System.in);
+        try (// Creo el objeto scanner
+                Scanner scanner2 = new Scanner(System.in)) {
             String jugada = scanner2.nextLine();
 
             if (jugada.equals("-")) {
@@ -492,6 +491,7 @@ public class practicaDefinitiva {
                 return jugada;
             }
         }
+    }
 
     // Funcion que devuelva la jugada como valores entero para insertarlo en la
     // matriz
@@ -514,13 +514,13 @@ public class practicaDefinitiva {
         }
 
         // Cambio los valores en funcion de lo que haya en el tablero
-        if(tableroJuego[fila][columna] == 0){
+        if (tableroJuego[fila][columna] == 0) {
             tableroJuego[fila][columna] = 1;
         }
-        if(tableroJuego[fila][columna] == 1){
+        if (tableroJuego[fila][columna] == 1) {
             tableroJuego[fila][columna] = 2;
         }
-        if(tableroJuego[fila][columna] == 2){
+        if (tableroJuego[fila][columna] == 2) {
             tableroJuego[fila][columna] = 0;
         }
 
@@ -546,13 +546,13 @@ public class practicaDefinitiva {
         }
 
         // Cambio los valores en funcion de lo que haya en el tablero
-        if(tableroJuego[fila][columna] == 0){
+        if (tableroJuego[fila][columna] == 0) {
             tableroJuego[fila][columna] = 2;
         }
-        if(tableroJuego[fila][columna] == 1){
+        if (tableroJuego[fila][columna] == 1) {
             tableroJuego[fila][columna] = 0;
         }
-        if(tableroJuego[fila][columna] == 2){
+        if (tableroJuego[fila][columna] == 2) {
             tableroJuego[fila][columna] = 1;
         }
 
