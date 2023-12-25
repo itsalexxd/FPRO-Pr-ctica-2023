@@ -324,10 +324,10 @@ public class practicaDefinitiva {
     // Funcion que genera el tablero
     public static int[][] generadorTablero(int[][] tablero) {
         // Especifico la ruta del archivo
-        String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
+        String rutaArchivo = "/home/codespace/FPRO-Pr-ctica-2023/tableros.txt";
 
         // Variable para almacenar la linea leida del archivo
-        String[] lineaLeida = new String[1];
+        String[] lineaLeida = new String[24];
 
         // Abro el archivo
         try {
@@ -409,8 +409,8 @@ public class practicaDefinitiva {
     }
 
     public static String verificaJugada() {
-        try (// Creo el objeto scanner
-        Scanner scanner2 = new Scanner(System.in)) {
+        // Creo el objeto scanner
+        Scanner scanner2 = new Scanner(System.in);
             String jugada = scanner2.nextLine();
 
             if (jugada.equals("-")) {
@@ -480,8 +480,6 @@ public class practicaDefinitiva {
                 return jugada;
             }
         }
-
-    }
 
     // Funcion que devuelva la jugada como valores entero para insertarlo en la
     // matriz
