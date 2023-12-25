@@ -191,7 +191,7 @@ public class practicaDefinitiva {
         int[][] tablero = new int[6][6];
         // Array que almacena las jugadas y el contador que lleva la cuenta inversa
         int[] almacenJugadas = new int[100];
-        int contadorJugadas = 100;
+        int contadorJugadas = 99;
 
         String jugada = "";
         int fila = 0;
@@ -211,20 +211,31 @@ public class practicaDefinitiva {
 
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada();
-            contadorJugadas--;
+            
 
             if (!jugada.equals("finPartida")) {
                 // Retrocedemos una la jugada tantas veces como el usuario quiera
                 if (jugada.equals("-")) {
+                    // Almaceno la jugada realizada 
                     int jugadaAnterior = almacenJugadas[contadorJugadas + 1];
+
+                    // Extraigo la fila y la columna
                     fila = jugadaAnterior % 10;
                     columna = jugadaAnterior / 10;
+
+                    // 
                     recuperarJugada(fila, columna, tablero);
+                    
                 } else {
+                    // Extraigo la fila y la columna
                     fila = extraeFila(jugada);
                     columna = extraeColumna(jugada);
 
+                    // Almaceno la jugada realizada
                     almacenaJugadasUsuario(fila, columna, almacenJugadas, contadorJugadas);
+                    contadorJugadas--;
+
+                    // Inserto la jugada en el tablero
                     tablero = realizarJugada(fila, columna, tablero);
                 }
 
@@ -232,6 +243,7 @@ public class practicaDefinitiva {
                 System.out.println(); // Salto de linea
                 System.out.println(); // Salto de linea
 
+                // Muestro el tablero
                 mostrarTablero(tablero);
             } else {
 
