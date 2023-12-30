@@ -261,7 +261,12 @@ public class practicaDefinitiva {
                 System.out.println("Si / No: ");
                 jugada = scanner.next();
 
-                if (jugada.equals("Si") || jugada.equals("sI") || jugada.equals("si") || jugada.equals("SI")) {
+                if (jugada.toUpperCase().equals("SI")) {
+                    // Limpio el almacen de jugadas
+                    for(int cont = 0; cont < almacenJugadas.length; cont++){
+                        almacenJugadas[cont] = 0;
+                    }
+                    
                     // Sumo un intento a la partida
                     contPartidas++;
                     limpiadorTerminal();
@@ -290,6 +295,7 @@ public class practicaDefinitiva {
                     mostrarTablero(tablero);
 
                 } else {
+
                     limpiadorTerminal();
 
                     System.out.println("¿Sera un tablero valido segun las normas?");
@@ -337,7 +343,7 @@ public class practicaDefinitiva {
 
     // Funcion que limpia la terminal
     public static void limpiadorTerminal() {
-        for (int contador = 0; contador < 73; contador++) {
+        for (int contador = 0; contador < 763; contador++) {
             System.out.println();
         }
     }
