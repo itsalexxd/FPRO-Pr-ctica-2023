@@ -261,11 +261,13 @@ public class practicaDefinitiva {
                 System.out.println("Si / No: ");
                 jugada = scanner.next();
 
-                if (jugada.toUpperCase().equals("SI")) {
+                if (jugada.length() == 2 && jugada.toUpperCase().equals("SI")) {
                     // Limpio el almacen de jugadas
                     for(int cont = 0; cont < almacenJugadas.length; cont++){
                         almacenJugadas[cont] = 0;
                     }
+                    contadorJugadas = 0;
+                    recuperaciones = 1;
                     
                     // Sumo un intento a la partida
                     contPartidas++;
@@ -294,7 +296,7 @@ public class practicaDefinitiva {
                     tablero = generadorTablero(tablero, LongditudTablero);
                     mostrarTablero(tablero);
 
-                } else {
+                } else if(jugada.length() == 2 && jugada.toUpperCase().equals("NO")) {
 
                     limpiadorTerminal();
 
@@ -409,7 +411,7 @@ public class practicaDefinitiva {
     // Funcion que imprime el tablero
     public static void mostrarTablero(int[][] tableroAImprimir) {
         // Muestro una guia de las columnas
-        System.out.print("---| ");
+        System.out.print("___| ");
         for (int cont = 0; cont < tableroAImprimir.length; cont++) {
             System.out.print(" " + (char) ('A' + cont) + " ");
         }
