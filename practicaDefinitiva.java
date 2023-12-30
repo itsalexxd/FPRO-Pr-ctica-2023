@@ -218,16 +218,20 @@ public class practicaDefinitiva {
             if (!jugada.equals("finPartida")) {
                 // Retrocedemos una la jugada tantas veces como el usuario quiera
                 if (jugada.equals("-")) {
-                    // Recupero la jugada inmediatamente anterior
-                    int jugadaAnterior = almacenJugadas[contadorJugadas - recuperaciones];
-                    recuperaciones++;
+                    if ((contadorJugadas - recuperaciones) < 0) {
+                        System.out.println("No hay jugadas disponibles para recuperar.");
+                    } else {
+                        // Recupero la jugada inmediatamente anterior
+                        int jugadaAnterior = almacenJugadas[contadorJugadas - recuperaciones];
+                        recuperaciones++;
 
-                    // Extraigo la fila y la columna
-                    fila = jugadaAnterior / 10;
-                    columna = jugadaAnterior % 10;
+                        // Extraigo la fila y la columna
+                        fila = jugadaAnterior / 10;
+                        columna = jugadaAnterior % 10;
 
-                    // Recuperamos la jugada inmediatamente anterior
-                    recuperarJugada(fila, columna, tablero);
+                        // Recuperamos la jugada inmediatamente anterior
+                        recuperarJugada(fila, columna, tablero);
+                    }
 
                 } else {
                     // Extraigo la fila y la columna
@@ -534,15 +538,12 @@ public class practicaDefinitiva {
 
     // Funcion que se encarga de insertar las jugadas
     public static int[][] recuperarJugada(int fila, int columna, int[][] tableroJuego) {
-        if(){
-            return tableroJuego;
-        }
         System.out.println("Fila: " + fila);
         System.out.println("Columna: " + columna);
         // Compruebo que valor es la posicion y modifico en funcion del que sea
         if (tableroJuego[fila][columna] < 0) {
             System.out.print("Esa casilla no se puede editar...");
-        }else {
+        } else {
             tableroJuego[fila][columna] = (tableroJuego[fila][columna] + 2) % 3;
         }
 
