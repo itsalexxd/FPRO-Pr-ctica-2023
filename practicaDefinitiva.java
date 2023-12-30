@@ -335,7 +335,7 @@ public class practicaDefinitiva {
     // Funcion que genera el tablero
     public static int[][] generadorTablero(int[][] tablero) {
         // Especifico la ruta del archivo
-        String rutaArchivo = "/home/codespace/FPRO-Pr-ctica-2023/tableros.txt";
+        String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
 
         // Variable para almacenar la linea leida del archivo
         String[] lineaLeida = new String[24];
@@ -420,8 +420,7 @@ public class practicaDefinitiva {
     }
 
     public static String verificaJugada() {
-        try (// Creo el objeto scanner
-                Scanner scanner2 = new Scanner(System.in)) {
+            Scanner scanner2 = new Scanner(System.in);
             String jugada = scanner2.nextLine();
 
             if (jugada.equals("-")) {
@@ -491,7 +490,6 @@ public class practicaDefinitiva {
                 return jugada;
             }
         }
-    }
 
     // Funcion que devuelva la jugada como valores entero para insertarlo en la
     // matriz
@@ -511,17 +509,8 @@ public class practicaDefinitiva {
         // Compruebo que valor es la posicion y modifico en funcion del que sea
         if (tableroJuego[fila][columna] < 0) {
             System.out.print("Esa casilla no se puede editar...");
-        }
-
-        // Cambio los valores en funcion de lo que haya en el tablero
-        if (tableroJuego[fila][columna] == 0) {
-            tableroJuego[fila][columna] = 1;
-        }
-        if (tableroJuego[fila][columna] == 1) {
-            tableroJuego[fila][columna] = 2;
-        }
-        if (tableroJuego[fila][columna] == 2) {
-            tableroJuego[fila][columna] = 0;
+        } else {
+            tableroJuego[fila][columna] = (tableroJuego[fila][columna] + 1) % 3;
         }
 
         return tableroJuego;
