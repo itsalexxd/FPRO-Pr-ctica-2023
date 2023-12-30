@@ -186,15 +186,15 @@ public class practicaDefinitiva {
         }
 
         limpiadorTerminal();
-
+        int LongditudTablero = 6;
         // Creo una matriz que almacene al tablero
-        int[][] tablero = new int[6][6];
+        int[][] tablero = new int[LongditudTablero][LongditudTablero];
         // Array que almacena las jugadas y el contador que lleva la cuenta inversa
         int[] almacenJugadas = new int[100];
         int contadorJugadas = 0;
         int recuperaciones = 1;
 
-        int longditudTablero = 6;
+       
 
         String jugada = "";
         int fila = 0;
@@ -205,7 +205,7 @@ public class practicaDefinitiva {
         int contVictorias = 0;
         double porcentajeVictorias = 0;
 
-        tablero = generadorTablero(tablero, longditudTablero);
+        tablero = generadorTablero(tablero, LongditudTablero);
         mostrarTablero(tablero);
 
         while (!finPartida) {
@@ -213,7 +213,7 @@ public class practicaDefinitiva {
             finPartida = false;
 
             System.out.print("Inserte la jugada que desea realizar: ");
-            jugada = verificaJugada(longditudTablero);
+            jugada = verificaJugada(LongditudTablero);
 
             if (!jugada.equals("finPartida")) {
                 // Retrocedemos una la jugada tantas veces como el usuario quiera
@@ -270,8 +270,8 @@ public class practicaDefinitiva {
                     System.out.println("Resumen de las reglas del tablero finalizado: ");
                     System.out.println();
                     if (tableroRellenado(tablero) && tresElementosIguales(tablero)
-                            && compruebaFilasRepetidas(tablero, longditudTablero)
-                            && compruebaColumnasRepetidas(tablero, longditudTablero)) {
+                            && compruebaFilasRepetidas(tablero, LongditudTablero)
+                            && compruebaColumnasRepetidas(tablero, LongditudTablero)) {
                         contVictorias++;
 
                         System.out.println();
@@ -286,7 +286,7 @@ public class practicaDefinitiva {
                     System.out.println();
                     System.out.println();
 
-                    tablero = generadorTablero(tablero, longditudTablero);
+                    tablero = generadorTablero(tablero, LongditudTablero);
                     mostrarTablero(tablero);
 
                 } else {
@@ -296,8 +296,8 @@ public class practicaDefinitiva {
                     System.out.println();
 
                     if (tableroRellenado(tablero) && tresElementosIguales(tablero)
-                            && compruebaFilasRepetidas(tablero, longditudTablero)
-                            && compruebaColumnasRepetidas(tablero, longditudTablero)) {
+                            && compruebaFilasRepetidas(tablero, LongditudTablero)
+                            && compruebaColumnasRepetidas(tablero, LongditudTablero)) {
                         contVictorias++;
 
                         System.out.println();
