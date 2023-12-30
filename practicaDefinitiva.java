@@ -191,7 +191,8 @@ public class practicaDefinitiva {
         int[][] tablero = new int[6][6];
         // Array que almacena las jugadas y el contador que lleva la cuenta inversa
         int[] almacenJugadas = new int[100];
-        int contadorJugadas = 99;
+        int contadorJugadas = 0;
+        int recuperaciones = 1;
 
         int longditudTablero = 6;
 
@@ -217,14 +218,15 @@ public class practicaDefinitiva {
             if (!jugada.equals("finPartida")) {
                 // Retrocedemos una la jugada tantas veces como el usuario quiera
                 if (jugada.equals("-")) {
-                    // Almaceno la jugada realizada
-                    int jugadaAnterior = almacenJugadas[contadorJugadas + 1];
+                    // Recupero la jugada inmediatamente anterior
+                    int jugadaAnterior = almacenJugadas[contadorJugadas - recuperaciones];
+                    recuperaciones++;
 
                     // Extraigo la fila y la columna
                     fila = jugadaAnterior % 10;
-                    columna = jugadaAnterior / 10;
+                    columna = jugadaAnterior - (fila * 10);
 
-                    //
+                    // Recuperamos la
                     recuperarJugada(fila, columna, tablero);
 
                 } else {
@@ -234,7 +236,7 @@ public class practicaDefinitiva {
 
                     // Almaceno la jugada realizada
                     almacenaJugadasUsuario(fila, columna, almacenJugadas, contadorJugadas);
-                    contadorJugadas--;
+                    contadorJugadas++;
 
                     // Inserto la jugada en el tablero
                     tablero = realizarJugada(fila, columna, tablero);
@@ -532,6 +534,7 @@ public class practicaDefinitiva {
 
     // Funcion que se encarga de insertar las jugadas
     public static int[][] recuperarJugada(int fila, int columna, int[][] tableroJuego) {
+
         System.out.println("Fila" + fila);
         System.out.println("Columna" + columna);
         // Compruebo que valor es la posicion y modifico en funcion del que sea
