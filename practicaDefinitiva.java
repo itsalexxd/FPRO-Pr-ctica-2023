@@ -223,10 +223,10 @@ public class practicaDefinitiva {
                     recuperaciones++;
 
                     // Extraigo la fila y la columna
-                    fila = jugadaAnterior % 10;
-                    columna = jugadaAnterior - (fila * 10);
+                    fila = jugadaAnterior / 10;
+                    columna = jugadaAnterior % 10;
 
-                    // Recuperamos la
+                    // Recuperamos la jugada inmediatamente anterior
                     recuperarJugada(fila, columna, tablero);
 
                 } else {
@@ -534,23 +534,16 @@ public class practicaDefinitiva {
 
     // Funcion que se encarga de insertar las jugadas
     public static int[][] recuperarJugada(int fila, int columna, int[][] tableroJuego) {
-
-        System.out.println("Fila" + fila);
-        System.out.println("Columna" + columna);
+        if(){
+            return tableroJuego;
+        }
+        System.out.println("Fila: " + fila);
+        System.out.println("Columna: " + columna);
         // Compruebo que valor es la posicion y modifico en funcion del que sea
         if (tableroJuego[fila][columna] < 0) {
             System.out.print("Esa casilla no se puede editar...");
-        }
-
-        // Cambio los valores en funcion de lo que haya en el tablero
-        if (tableroJuego[fila][columna] == 0) {
-            tableroJuego[fila][columna] = 2;
-        }
-        if (tableroJuego[fila][columna] == 1) {
-            tableroJuego[fila][columna] = 0;
-        }
-        if (tableroJuego[fila][columna] == 2) {
-            tableroJuego[fila][columna] = 1;
+        }else {
+            tableroJuego[fila][columna] = (tableroJuego[fila][columna] + 2) % 3;
         }
 
         return tableroJuego;
