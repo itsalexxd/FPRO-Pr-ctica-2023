@@ -13,6 +13,8 @@ public class practicaDefinitiva {
 
         System.out.print("############### M E N U ###############");
         System.out.println(); // Salto de linea
+        System.out.println(); // Salto de linea
+        System.out.println(); // Salto de linea
 
         // Opciones del menu
         System.out.print("1. Ver las normas");
@@ -42,6 +44,8 @@ public class practicaDefinitiva {
                     limpiadorTerminal();
 
                     System.out.print("################### M E N U ###################");
+                    System.out.println(); // Salto de linea
+                    System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
 
                     // Opciones del menu
@@ -197,7 +201,7 @@ public class practicaDefinitiva {
         String jugada = "";
         int fila = 0;
         int columna = 0;
-        boolean finPartida = false;
+        boolean finPartida = true;
 
         int contPartidas = 1;
         int contVictorias = 0;
@@ -206,9 +210,8 @@ public class practicaDefinitiva {
         tablero = generadorTablero(tablero, LongditudTablero);
         mostrarTablero(tablero);
 
-        while (!finPartida) {
+        while (finPartida) {
             jugada = "";
-            finPartida = false;
 
             System.out.print("Inserte la jugada que desea realizar: ");
             jugada = verificaJugada(LongditudTablero);
@@ -328,7 +331,7 @@ public class practicaDefinitiva {
 
                     System.out.println("Nos vemos en la proxima partida!!");
 
-                    finPartida = true;
+                    finPartida = false;
                 } else {
                     System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
