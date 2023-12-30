@@ -194,8 +194,6 @@ public class practicaDefinitiva {
         int contadorJugadas = 0;
         int recuperaciones = 1;
 
-       
-
         String jugada = "";
         int fila = 0;
         int columna = 0;
@@ -258,17 +256,18 @@ public class practicaDefinitiva {
 
                 // Pregunto si quiere volver a jugar
                 System.out.println("¿Quieres volver a jugar?");
+                System.out.println("En caso de que quiera retomar la partida, inserte: \"Volver\"");
                 System.out.println("Si / No: ");
                 jugada = scanner.next();
 
                 if (jugada.length() == 2 && jugada.toUpperCase().equals("SI")) {
                     // Limpio el almacen de jugadas
-                    for(int cont = 0; cont < almacenJugadas.length; cont++){
+                    for (int cont = 0; cont < almacenJugadas.length; cont++) {
                         almacenJugadas[cont] = 0;
                     }
                     contadorJugadas = 0;
                     recuperaciones = 1;
-                    
+
                     // Sumo un intento a la partida
                     contPartidas++;
                     limpiadorTerminal();
@@ -296,7 +295,7 @@ public class practicaDefinitiva {
                     tablero = generadorTablero(tablero, LongditudTablero);
                     mostrarTablero(tablero);
 
-                } else if(jugada.length() == 2 && jugada.toUpperCase().equals("NO")) {
+                } else if (jugada.length() == 2 && jugada.toUpperCase().equals("NO")) {
 
                     limpiadorTerminal();
 
@@ -330,9 +329,15 @@ public class practicaDefinitiva {
                     System.out.println("Nos vemos en la proxima partida!!");
 
                     finPartida = true;
+                } else {
+                    System.out.println(); // Salto de linea
+                    System.out.println(); // Salto de linea
+                    System.out.println(); // Salto de linea
+
+                    // Muestro el tablero
+                    mostrarTablero(tablero);
                 }
             }
-
         }
 
         // Cierro el objeto scanner
@@ -506,9 +511,9 @@ public class practicaDefinitiva {
             }
 
         }
-            // Cierro el objeto scanner
-            scanner2.close();
-            return jugada;
+        // Cierro el objeto scanner
+        scanner2.close();
+        return jugada;
     }
 
     // Funcion que devuelva la jugada como valores entero para insertarlo en la
