@@ -642,6 +642,7 @@ public class practicaDefinitiva {
                 }
                 if (elementosIguales == longditudTablero) {
                     System.out.println("Se repite al menos una fila");
+                    System.out.println("Se repite la fila: " + (filaInicial + 1) + ", con la fila: " + (filaComparar + 1));
                     // Tiene filas repetidas
                     return false;
                 }
@@ -668,6 +669,7 @@ public class practicaDefinitiva {
                 }
                 if (elementosIguales == longditudTablero) {
                     System.out.println("Se repite al menos una columna.");
+                    System.out.println("Se repite la columna: " + (char) (columnaInicial + 'A') + ", con la columna: " + (char) (columnaComprobar + 'A'));
                     // Tiene filas repetidas
                     return false;
                 }
