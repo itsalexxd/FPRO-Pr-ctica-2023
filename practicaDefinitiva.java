@@ -107,10 +107,10 @@ public class practicaDefinitiva {
                     System.out
                             .println("Paso 1: Se te pedira la jugada que desea realizar, ha de ser del formato 'nC' ");
                     System.out.println("    n -> Es un numero correspondiente a la fila");
-                    System.out.println("    C -> Letra MAYUSCULA correspondiente a las columnas.");
+                    System.out.print("    C -> Letra MAYUSCULA correspondiente a las columnas.");
                     System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
-                    System.out.println(
+                    System.out.print(
                             "Paso 2: Justo debajo, te aparecera el tablero con el movimiento realizado y te volvera a pedir la jugada que desea realizar.");
                     System.out.println(); // Salto de linea
                     System.out.println(); // Salto de linea
@@ -137,9 +137,9 @@ public class practicaDefinitiva {
                     System.out.println("Practica hecha por: ");
                     System.out.print("Alejandro Garcia Lavandera y David Blasco Polo");
                     System.out.println(); // Salto de linea
-                    System.out.println(); // Salto de linea
-                    System.out.print("Practica realizada para el 17 de Diciembre del 2023");
-                    System.out.println(); // Salto de linea
+                    System.out.println();
+                    System.out.print("Curso: 2023 - 2024");
+                    System.out.println();
                     System.out.println(); // Salto de linea
                     System.out.print("Inserte '0' para volver al menu anterior: ");
 
@@ -353,7 +353,7 @@ public class practicaDefinitiva {
 
     // Funcion que limpia la terminal
     public static void limpiadorTerminal() {
-        for (int contador = 0; contador < 763; contador++) {
+        for (int contador = 0; contador < 73; contador++) {
             System.out.println();
         }
     }
@@ -361,10 +361,10 @@ public class practicaDefinitiva {
     // Funcion que genera el tablero
     public static int[][] generadorTablero(int[][] tablero, int longditudTablero) {
         // Especifico la ruta del archivo
-        String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
+        String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableroCorrecto.txt";
 
         // Variable para almacenar la linea leida del archivo
-        String[] lineaLeida = new String[24];
+        String[] lineaLeida = new String[1];
 
         // Abro el archivo
         try {
@@ -631,25 +631,23 @@ public class practicaDefinitiva {
         int elementosIguales = 0;
         // Elegimos la fila que queremos comparar
         for (int filaInicial = 0; filaInicial < longditudTablero - 1; filaInicial++) {
-
             // Elegimos la fila con la que vamos a comparar
             for (int filaComparar = filaInicial + 1; filaComparar < longditudTablero; filaComparar++) {
-                // Creo una variable que lleve la cuenta de los elementos iguales
                 elementosIguales = 0;
-
                 // Comparamos cada elemento
                 for (int cont = 0; cont < longditudTablero; cont++) {
                     if (Math.abs(tablero[filaInicial][cont]) == Math.abs(tablero[filaComparar][cont])) {
                         elementosIguales++;
                     }
                 }
+                if (elementosIguales == longditudTablero) {
+                    System.out.println("Se repite al menos una fila");
+                    // Tiene filas repetidas
+                    return false;
+                }
             }
         }
-        if (elementosIguales == longditudTablero) {
-            System.out.println("Se repite al menos una fila");
-            // Tiene filas repetidas
-            return false;
-        }
+
         System.out.println("No se repite ninguna fila");
         return true;
     }
@@ -659,25 +657,23 @@ public class practicaDefinitiva {
         int elementosIguales = 0;
         // Elegimos la fila que queremos comparar
         for (int columnaInicial = 0; columnaInicial < longditudTablero - 1; columnaInicial++) {
-
             // Elegimos la fila con la que vamos a comparar
             for (int columnaComprobar = columnaInicial + 1; columnaComprobar < longditudTablero; columnaComprobar++) {
-                // Creo una variable que lleve la cuenta de los elementos iguales
                 elementosIguales = 0;
-
                 // Comparamos cada elemento
                 for (int cont = 0; cont < longditudTablero; cont++) {
                     if (Math.abs(tablero[cont][columnaInicial]) == Math.abs(tablero[cont][columnaComprobar])) {
                         elementosIguales++;
                     }
                 }
+                if (elementosIguales == longditudTablero) {
+                    System.out.println("Se repite al menos una columna.");
+                    // Tiene filas repetidas
+                    return false;
+                }
             }
         }
-        if (elementosIguales == longditudTablero) {
-            System.out.println("Se repite al menos una columna.");
-            // Tiene filas repetidas
-            return false;
-        }
+
         System.out.println("No se repite ninguna columna.");
         return true;
     }
