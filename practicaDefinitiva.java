@@ -361,10 +361,10 @@ public class practicaDefinitiva {
     // Funcion que genera el tablero
     public static int[][] generadorTablero(int[][] tablero, int longditudTablero) {
         // Especifico la ruta del archivo
-        String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableroCorrecto.txt";
+        String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
 
         // Variable para almacenar la linea leida del archivo
-        String[] lineaLeida = new String[1];
+        String[] lineaLeida = new String[24];
 
         // Abro el archivo
         try {
