@@ -263,7 +263,8 @@ public class practicaDefinitiva {
                     // Si todas las verificaciones son validas, es una victoria
                     System.out.println("Resumen de las reglas del tablero finalizado: ");
                     System.out.println();
-                    if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero, longditudTablero)
+                    if (tableroRellenado(tablero) && tresElementosIguales(tablero)
+                            && compruebaFilasRepetidas(tablero, longditudTablero)
                             && compruebaColumnasRepetidas(tablero, longditudTablero)) {
                         contVictorias++;
 
@@ -288,7 +289,8 @@ public class practicaDefinitiva {
                     System.out.println("¿Sera un tablero valido segun las normas?");
                     System.out.println();
 
-                    if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero, longditudTablero)
+                    if (tableroRellenado(tablero) && tresElementosIguales(tablero)
+                            && compruebaFilasRepetidas(tablero, longditudTablero)
                             && compruebaColumnasRepetidas(tablero, longditudTablero)) {
                         contVictorias++;
 
@@ -422,78 +424,77 @@ public class practicaDefinitiva {
     }
 
     public static String verificaJugada(int longditudTablero) {
-        
-            try (Scanner scanner2 = new Scanner(System.in)) {
-                String jugada = scanner2.nextLine();
 
-                if (jugada.equals("-")) {
-                    return jugada;
-                }
+        Scanner scanner2 = new Scanner(System.in);
+        String jugada = scanner2.nextLine();
 
-                if (jugada.equals("")) {
-                    jugada = "finPartida";
-                    return jugada;
+        if (jugada.equals("-")) {
+            return jugada;
+        }
 
-                } else {
-                    // Creo una variable para controla el bucle
-                    boolean entradaCorrecta = false;
-                    // Compruebo si la entrada es correcta, en caso de que no lo sea, la vuelve ha
-                    // pedir hasta que lo sea
-                    while (!entradaCorrecta) {
-                        // Verifico que la entrada es valida
-                        if (jugada.length() == 2) {
-                            // Extraigo cada caracter de la entrada por separado
-                            char filaNumero = jugada.charAt(0);
-                            char columnaLetra = jugada.charAt(1);
+        if (jugada.equals("")) {
+            jugada = "finPartida";
+            return jugada;
 
-                            // Verifico que los caracteres son validos y se corresponde con la forma nC
-                            if (filaNumero >= '1' && filaNumero <= '6' && columnaLetra >= 'A' && columnaLetra <= 'F') {
-                                // Paso los caracteres a enteros
-                                int fila = (int) (filaNumero - '0');
-                                int columna = (int) (columnaLetra - 'A' + 1);
+        } else {
+            // Creo una variable para controla el bucle
+            boolean entradaCorrecta = false;
+            // Compruebo si la entrada es correcta, en caso de que no lo sea, la vuelve ha
+            // pedir hasta que lo sea
+            while (!entradaCorrecta) {
+                // Verifico que la entrada es valida
+                if (jugada.length() == 2) {
+                    // Extraigo cada caracter de la entrada por separado
+                    char filaNumero = jugada.charAt(0);
+                    char columnaLetra = jugada.charAt(1);
 
-                                // Compruebo que los valores estan dentro del rango permitido
-                                if (fila < 1 || fila > longditudTablero) {
-                                    System.out.println("La fila insertada no existe...");
-                                    System.out.println("Las filas van desde la 1 hasta la 6...");
-                                    System.out.println("Inserte de nuevo la jugada: ");
-                                    System.out.println(); // Salto de linea
+                    // Verifico que los caracteres son validos y se corresponde con la forma nC
+                    if (filaNumero >= '1' && filaNumero <= '6' && columnaLetra >= 'A' && columnaLetra <= 'F') {
+                        // Paso los caracteres a enteros
+                        int fila = (int) (filaNumero - '0');
+                        int columna = (int) (columnaLetra - 'A' + 1);
 
-                                    jugada = scanner2.nextLine();
-                                }
-                                if (columna < 1 || columna > longditudTablero) {
-                                    System.out.println("La  columna insertada no existe...");
-                                    System.out.println("Las columnas van desde la A hasta la F...");
-                                    System.out.println("Inserte de nuevo la jugada: ");
-                                    System.out.println(); // Salto de linea
+                        // Compruebo que los valores estan dentro del rango permitido
+                        if (fila < 1 || fila > longditudTablero) {
+                            System.out.println("La fila insertada no existe...");
+                            System.out.println("Las filas van desde la 1 hasta la 6...");
+                            System.out.println("Inserte de nuevo la jugada: ");
+                            System.out.println(); // Salto de linea
 
-                                    jugada = scanner2.nextLine();
-                                }
-
-                                entradaCorrecta = true;
-                                return jugada;
-
-                            } else {
-                                System.out.println("Jugada no valida, debe de ser del formato 'nC': ");
-                                System.out.println("    Donde [ n ] es un numero entre el 1 y el 6.");
-                                System.out.println("    Donde [ C ] es una letra MAYUSCULA entre la A y la F.");
-                                System.out.println(); // Salto de linea
-                                System.out.print("Por favor, vuelva a insertar la jugada que desea realizar: ");
-                                jugada = scanner2.nextLine();
-                            }
-
-                        } else {
-                            System.out.println("La longitud de la jugada insertada no es valida...");
-                            System.out.print("Por favor, vuelva a insertar la jugada que desea realizar: ");
                             jugada = scanner2.nextLine();
                         }
+                        if (columna < 1 || columna > longditudTablero) {
+                            System.out.println("La  columna insertada no existe...");
+                            System.out.println("Las columnas van desde la A hasta la F...");
+                            System.out.println("Inserte de nuevo la jugada: ");
+                            System.out.println(); // Salto de linea
+
+                            jugada = scanner2.nextLine();
+                        }
+
+                        entradaCorrecta = true;
+                        return jugada;
+
+                    } else {
+                        System.out.println("Jugada no valida, debe de ser del formato 'nC': ");
+                        System.out.println("    Donde [ n ] es un numero entre el 1 y el 6.");
+                        System.out.println("    Donde [ C ] es una letra MAYUSCULA entre la A y la F.");
+                        System.out.println(); // Salto de linea
+                        System.out.print("Por favor, vuelva a insertar la jugada que desea realizar: ");
+                        jugada = scanner2.nextLine();
                     }
-                    // Cierro el objeto scanner
-                    scanner2.close();
-                    return jugada;
+
+                } else {
+                    System.out.println("La longitud de la jugada insertada no es valida...");
+                    System.out.print("Por favor, vuelva a insertar la jugada que desea realizar: ");
+                    jugada = scanner2.nextLine();
                 }
             }
+            // Cierro el objeto scanner
+            scanner2.close();
+            return jugada;
         }
+    }
 
     // Funcion que devuelva la jugada como valores entero para insertarlo en la
     // matriz
