@@ -496,10 +496,11 @@ public class practicaDefinitiva {
                     jugada = scanner2.nextLine();
                 }
             }
+
+        }
             // Cierro el objeto scanner
             scanner2.close();
             return jugada;
-        }
     }
 
     // Funcion que devuelva la jugada como valores entero para insertarlo en la
