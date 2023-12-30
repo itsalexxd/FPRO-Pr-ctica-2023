@@ -193,6 +193,8 @@ public class practicaDefinitiva {
         int[] almacenJugadas = new int[100];
         int contadorJugadas = 99;
 
+        int longditudTablero = 6;
+
         String jugada = "";
         int fila = 0;
         int columna = 0;
@@ -202,7 +204,7 @@ public class practicaDefinitiva {
         int contVictorias = 0;
         double porcentajeVictorias = 0;
 
-        tablero = generadorTablero(tablero);
+        tablero = generadorTablero(tablero, longditudTablero);
         mostrarTablero(tablero);
 
         while (!finPartida) {
@@ -210,7 +212,7 @@ public class practicaDefinitiva {
             finPartida = false;
 
             System.out.print("Inserte la jugada que desea realizar: ");
-            jugada = verificaJugada();
+            jugada = verificaJugada(longditudTablero);
 
             if (!jugada.equals("finPartida")) {
                 // Retrocedemos una la jugada tantas veces como el usuario quiera
@@ -261,8 +263,8 @@ public class practicaDefinitiva {
                     // Si todas las verificaciones son validas, es una victoria
                     System.out.println("Resumen de las reglas del tablero finalizado: ");
                     System.out.println();
-                    if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero)
-                            && compruebaColumnasRepetidas(tablero)) {
+                    if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero, longditudTablero)
+                            && compruebaColumnasRepetidas(tablero, longditudTablero)) {
                         contVictorias++;
 
                         System.out.println();
@@ -277,7 +279,7 @@ public class practicaDefinitiva {
                     System.out.println();
                     System.out.println();
 
-                    tablero = generadorTablero(tablero);
+                    tablero = generadorTablero(tablero, longditudTablero);
                     mostrarTablero(tablero);
 
                 } else {
@@ -286,8 +288,8 @@ public class practicaDefinitiva {
                     System.out.println("¿Sera un tablero valido segun las normas?");
                     System.out.println();
 
-                    if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero)
-                            && compruebaColumnasRepetidas(tablero)) {
+                    if (tableroRellenado(tablero) && tresElementosIguales(tablero) && compruebaFilasRepetidas(tablero, longditudTablero)
+                            && compruebaColumnasRepetidas(tablero, longditudTablero)) {
                         contVictorias++;
 
                         System.out.println();
@@ -333,7 +335,7 @@ public class practicaDefinitiva {
     }
 
     // Funcion que genera el tablero
-    public static int[][] generadorTablero(int[][] tablero) {
+    public static int[][] generadorTablero(int[][] tablero, int longditudTablero) {
         // Especifico la ruta del archivo
         String rutaArchivo = "/workspaces/FPRO-Pr-ctica-2023/tableros.txt";
 
@@ -381,8 +383,8 @@ public class practicaDefinitiva {
 
         // Imprimo el array
         for (int cont = 0; cont < elementos.length; cont++) {
-            int fila = cont % 6;
-            int columna = cont / 6;
+            int fila = cont % longditudTablero;
+            int columna = cont / longditudTablero;
 
             tablero[fila][columna] = (-1 * elementos[cont]);
         }
@@ -419,7 +421,8 @@ public class practicaDefinitiva {
         System.out.println(); // Salto de linea
     }
 
-    public static String verificaJugada() {
+    public static String verificaJugada(int longditudTablero) {
+        
             Scanner scanner2 = new Scanner(System.in);
             String jugada = scanner2.nextLine();
 
@@ -450,7 +453,7 @@ public class practicaDefinitiva {
                             int columna = (int) (columnaLetra - 'A' + 1);
 
                             // Compruebo que los valores estan dentro del rango permitido
-                            if (fila < 1 || fila > 6) {
+                            if (fila < 1 || fila > longditudTablero) {
                                 System.out.println("La fila insertada no existe...");
                                 System.out.println("Las filas van desde la 1 hasta la 6...");
                                 System.out.println("Inserte de nuevo la jugada: ");
@@ -458,7 +461,7 @@ public class practicaDefinitiva {
 
                                 jugada = scanner2.nextLine();
                             }
-                            if (columna < 1 || columna > 6) {
+                            if (columna < 1 || columna > longditudTablero) {
                                 System.out.println("La  columna insertada no existe...");
                                 System.out.println("Las columnas van desde la A hasta la F...");
                                 System.out.println("Inserte de nuevo la jugada: ");
@@ -608,25 +611,25 @@ public class practicaDefinitiva {
     }
 
     // Compruebo si hay filas iguales
-    public static boolean compruebaFilasRepetidas(int[][] tablero) {
+    public static boolean compruebaFilasRepetidas(int[][] tablero, int longditudTablero) {
         int elementosIguales = 0;
         // Elegimos la fila que queremos comparar
-        for (int filaInicial = 0; filaInicial < tablero.length - 1; filaInicial++) {
+        for (int filaInicial = 0; filaInicial < longditudTablero - 1; filaInicial++) {
 
             // Elegimos la fila con la que vamos a comparar
-            for (int filaComparar = filaInicial + 1; filaComparar < tablero.length; filaComparar++) {
+            for (int filaComparar = filaInicial + 1; filaComparar < longditudTablero; filaComparar++) {
                 // Creo una variable que lleve la cuenta de los elementos iguales
                 elementosIguales = 0;
 
                 // Comparamos cada elemento
-                for (int cont = 0; cont < tablero.length; cont++) {
+                for (int cont = 0; cont < longditudTablero; cont++) {
                     if (Math.abs(tablero[filaInicial][cont]) == Math.abs(tablero[filaComparar][cont])) {
                         elementosIguales++;
                     }
                 }
             }
         }
-        if (elementosIguales == tablero.length) {
+        if (elementosIguales == longditudTablero) {
             System.out.println("Se repite al menos una fila");
             // Tiene filas repetidas
             return false;
@@ -636,25 +639,25 @@ public class practicaDefinitiva {
     }
 
     // Compruebo si hay columnas iguales
-    public static boolean compruebaColumnasRepetidas(int[][] tablero) {
+    public static boolean compruebaColumnasRepetidas(int[][] tablero, int longditudTablero) {
         int elementosIguales = 0;
         // Elegimos la fila que queremos comparar
-        for (int columnaInicial = 0; columnaInicial < tablero.length - 1; columnaInicial++) {
+        for (int columnaInicial = 0; columnaInicial < longditudTablero - 1; columnaInicial++) {
 
             // Elegimos la fila con la que vamos a comparar
-            for (int columnaComprobar = columnaInicial + 1; columnaComprobar < tablero.length; columnaComprobar++) {
+            for (int columnaComprobar = columnaInicial + 1; columnaComprobar < longditudTablero; columnaComprobar++) {
                 // Creo una variable que lleve la cuenta de los elementos iguales
                 elementosIguales = 0;
 
                 // Comparamos cada elemento
-                for (int cont = 0; cont < tablero.length; cont++) {
+                for (int cont = 0; cont < longditudTablero; cont++) {
                     if (Math.abs(tablero[cont][columnaInicial]) == Math.abs(tablero[cont][columnaComprobar])) {
                         elementosIguales++;
                     }
                 }
             }
         }
-        if (elementosIguales == tablero.length) {
+        if (elementosIguales == longditudTablero) {
             System.out.println("Se repite al menos una columna.");
             // Tiene filas repetidas
             return false;
