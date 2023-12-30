@@ -190,7 +190,7 @@ public class practicaDefinitiva {
         // Creo una matriz que almacene al tablero
         int[][] tablero = new int[LongditudTablero][LongditudTablero];
         // Array que almacena las jugadas y el contador que lleva la cuenta inversa
-        int[] almacenJugadas = new int[100];
+        int[] almacenJugadas = new int[69420];
         int contadorJugadas = 0;
         int recuperaciones = 1;
 
