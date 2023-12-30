@@ -327,7 +327,7 @@ public class practicaDefinitiva {
 
     // Funcion que limpia la terminal
     public static void limpiadorTerminal() {
-        for (int contador = 0; contador < 70; contador++) {
+        for (int contador = 0; contador < 73; contador++) {
             System.out.println();
         }
     }
